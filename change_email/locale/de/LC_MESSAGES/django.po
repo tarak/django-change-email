@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -20,52 +19,57 @@ msgstr ""
 
 #: admin.py:11
 msgid "Resend confirmation email to selected addresses"
-msgstr ""
+msgstr "Erneutes versenden der Email zur Bestätigung an selektierte Adressen"
 
 #: forms.py:21
 msgid "This email address is taken."
-msgstr ""
+msgstr "Diese Email-Adresse is in Benutzung."
 
 #: models.py:22
 msgid "new email address"
-msgstr ""
+msgstr "Neue Email-Adresse"
 
 #: models.py:23
 msgid "The date and time the email address change was requested."
-msgstr ""
+msgstr "Das Datum und die Zeit zu der Änderung der Email-Adresse angefordert wurde."
 
 #: models.py:23
 msgid "date"
-msgstr ""
+msgstr "Datum"
 
 #: models.py:24
 msgid "The user that has requested the email address change."
-msgstr ""
+msgstr "Der Benutzer der die Änderung der Email-Adresse angefordert hat."
 
 #: models.py:24
 msgid "user"
-msgstr ""
+msgstr "Benutzer"
 
 #: models.py:30
 msgid "email address change request"
-msgstr ""
+msgstr "Anforderung zur Änderung der Email-Adresse"
 
 #: models.py:31
 msgid "email address change requests"
-msgstr ""
+msgstr "Anforderungen zur Änderung der Email-Adresse"
 
 #: views.py:57 views.py:134 views.py:163
 msgid ""
 "No email address change request was found. Either an old one has expired or "
 "a new one has not been requested."
 msgstr ""
+"Es wurde keine Anforderung zur Änderung der Email-Adresse gefunden. Entweder"
+"ist eine alte Anforderung abgelaufen oder es wurde keine Änderung der Email-"
+"Adresse angefordert."
 
 #: views.py:97
 msgid ""
 "An email address change request was found. It must be deleted before a new "
 "one can be requested."
 msgstr ""
+"Eine Anforderung zur Änderung der Email-Adresse wurde gefunden. Diese muss"
+"gelöscht werden bevor eine neue Anforderung gestellt werden kann."
 
 #: views.py:110
 msgid "The email address change request was processed."
-msgstr ""
+msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
