@@ -1,0 +1,6 @@
+from django.conf import settings
+
+
+EMAIL_CHANGE_VERIFICATION_DAYS = getattr(settings, 'EMAIL_CHANGE_VERIFICATION_DAYS', 2)
+EMAIL_CHANGE_FROM_EMAIL = getattr(settings, 'EMAIL_CHANGE_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL)
+EMAIL_CHANGE_HTML_EMAIL = getattr(settings, 'EMAIL_CHANGE_HTML_EMAIL', False)

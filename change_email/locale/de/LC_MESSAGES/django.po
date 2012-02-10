@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-10 13:56+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: admin.py:11
+msgid "Resend confirmation email to selected addresses"
+msgstr ""
+
+#: forms.py:21
+msgid "This email address is taken."
+msgstr ""
+
+#: models.py:22
+msgid "new email address"
+msgstr ""
+
+#: models.py:23
+msgid "The date and time the email address change was requested."
+msgstr ""
+
+#: models.py:23
+msgid "date"
+msgstr ""
+
+#: models.py:24
+msgid "The user that has requested the email address change."
+msgstr ""
+
+#: models.py:24
+msgid "user"
+msgstr ""
+
+#: models.py:30
+msgid "email address change request"
+msgstr ""
+
+#: models.py:31
+msgid "email address change requests"
+msgstr ""
+
+#: views.py:57 views.py:134 views.py:163
+msgid ""
+"No email address change request was found. Either an old one has expired or "
+"a new one has not been requested."
+msgstr ""
+
+#: views.py:97
+msgid ""
+"An email address change request was found. It must be deleted before a new "
+"one can be requested."
+msgstr ""
+
+#: views.py:110
+msgid "The email address change request was processed."
+msgstr ""
