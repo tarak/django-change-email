@@ -6,7 +6,7 @@ from django.utils.http import int_to_base36, base36_to_int
 from change_email import app_settings
 
 
-EMAIL_CHANGE_VERIFICATION_DAYS = getattr(app_settings, 'EMAIL_CHANGE_VERIFICATION_DAYS')
+EMAIL_CHANGE_EXPIRATION_DAYS = getattr(app_settings, 'EMAIL_CHANGE_EXPIRATION_DAYS')
 
 
 class EmailChangeTokenGenerator(object):
@@ -40,7 +40,7 @@ class EmailChangeTokenGenerator(object):
             return False
         # Check the timestamp is within limit
         num_days = (self._num_days(self._today()) - ts)
-        if num_days > EMAIL_CHANGE_VERIFICATION_DAYS:
+        if num_days > EMAIL_CHANGE_EXPIRATION_DAYS:
             return False
         return True
 

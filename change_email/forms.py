@@ -18,6 +18,6 @@ class EmailChangeForm(forms.ModelForm):
         users = User.objects.filter(email__iexact=new_email).count()
         email_changes = EmailChange.objects.filter(new_email__iexact=new_email).count()
         if users > 0 or email_changes > 0:
-            msg = _("This email address is taken.")
+            msg = _("This email address is already in use. Please supply a different email address.")
             raise forms.ValidationError(msg)
         return new_email

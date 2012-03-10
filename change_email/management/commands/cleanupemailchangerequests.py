@@ -7,4 +7,4 @@ class Command(NoArgsCommand):
     help = "Delete expired email change requests from the database"
 
     def handle_noargs(self, **options):
-        EmailChange.expired_objects.delete()
+        EmailChange.expired_objects.all().delete()

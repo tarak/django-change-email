@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-10 13:56+0100\n"
+"POT-Creation-Date: 2012-03-10 01:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,59 +17,83 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: admin.py:11
+#: admin.py:10
 msgid "Resend confirmation email to selected addresses"
 msgstr "Erneutes versenden der Email zur Bestätigung an selektierte Adressen"
 
 #: forms.py:21
-msgid "This email address is taken."
-msgstr "Diese Email-Adresse is in Benutzung."
+msgid ""
+"This email address is already in use. Please supply a different email "
+"address."
+msgstr ""
 
-#: models.py:22
+#: models.py:36
 msgid "new email address"
 msgstr "Neue Email-Adresse"
 
-#: models.py:23
+#: models.py:37
 msgid "The date and time the email address change was requested."
-msgstr "Das Datum und die Zeit zu der Änderung der Email-Adresse angefordert wurde."
+msgstr ""
+"Das Datum und die Zeit zu der die Änderung der Email-Adresse angefordert "
+"wurde."
 
-#: models.py:23
+#: models.py:37
 msgid "date"
 msgstr "Datum"
 
-#: models.py:24
+#: models.py:38
 msgid "The user that has requested the email address change."
 msgstr "Der Benutzer der die Änderung der Email-Adresse angefordert hat."
 
-#: models.py:24
+#: models.py:38
 msgid "user"
 msgstr "Benutzer"
 
-#: models.py:30
+#: models.py:45
 msgid "email address change request"
 msgstr "Anforderung zur Änderung der Email-Adresse"
 
-#: models.py:31
+#: models.py:46
 msgid "email address change requests"
 msgstr "Anforderungen zur Änderung der Email-Adresse"
 
-#: views.py:57 views.py:134 views.py:163
+#: views.py:57 views.py:137 views.py:168
 msgid ""
 "No email address change request was found. Either an old one has expired or "
 "a new one has not been requested."
 msgstr ""
-"Es wurde keine Anforderung zur Änderung der Email-Adresse gefunden. Entweder"
-"ist eine alte Anforderung abgelaufen oder es wurde keine Änderung der Email-"
-"Adresse angefordert."
+"Es wurde keine Anforderung zur Änderung der Email-Adresse gefunden. "
+"Entwederist eine alte Anforderung abgelaufen oder es wurde keine Änderung "
+"der Email-Adresse angefordert."
 
-#: views.py:97
+#: views.py:73
+msgid ""
+"The email address change was confirmed. Your new email address will be used "
+"as primary address."
+msgstr ""
+
+#: views.py:76
+#, fuzzy
+msgid ""
+"The email address change has not been confirmed. Please request a new one."
+msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
+
+#: views.py:102
 msgid ""
 "An email address change request was found. It must be deleted before a new "
 "one can be requested."
 msgstr ""
-"Eine Anforderung zur Änderung der Email-Adresse wurde gefunden. Diese muss"
-"gelöscht werden bevor eine neue Anforderung gestellt werden kann."
+"Eine Anforderung zur Änderung der Email-Adresse wurde gefunden. Diese "
+"mussgelöscht werden bevor eine neue Anforderung gestellt werden kann."
 
-#: views.py:110
+#: views.py:113
 msgid "The email address change request was processed."
 msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
+
+#: views.py:144
+#, fuzzy
+msgid "The email address change request was deleted."
+msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
+
+#~ msgid "This email address is taken."
+#~ msgstr "Diese Email-Adresse ist vergeben."

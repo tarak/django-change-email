@@ -17,7 +17,10 @@ from change_email import app_settings
 from change_email.forms import EmailChangeForm
 from change_email.models import EmailChange
 from change_email.mail import send_confirmation
+from change_email.tokens import default_token_generator
 
+
+EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL = getattr(app_settings, 'EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL')
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +59,7 @@ class EmailChangeConfirmView(TemplateView):
         except EmailChange.DoesNotExist:
             msg = _("No email address change request was found. Either an old one has expired or a new one has not been requested.")
             messages.add_message(request, messages.ERROR, msg)
-            logger.error('No email address change request found.')
+            #logger.error('No email address change request found.')
             return HttpResponseRedirect(reverse('change_email_create'))
         self.object = object
         return super(EmailChangeConfirmView, self).dispatch(request, *args, **kwargs)
@@ -69,6 +72,13 @@ class EmailChangeConfirmView(TemplateView):
             self.request.user.email = self.object.new_email
             self.request.user.save()
             self.object.delete()
+        if context['confirmed']:
+           msg = _("The email address change was confirmed. Your new email address will be used as primary address.")
+           messages.add_message(self.request, messages.ERROR, msg)
+        else:
+           msg = _("The email address change has not been confirmed. Please request a new one.")
+           messages.add_message(self.request, messages.ERROR, msg)
+           #logger.error('Email address change request was not confirmed.')
         return context
 
 
@@ -88,28 +98,25 @@ class EmailChangeCreateView(CreateView):
     """
     model = EmailChange
     form_class = EmailChangeForm
-    template_name_txt = 'change_email/emailchange_email.txt'
-    template_name_html = 'change_email/emailchange_email.html'
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         if EmailChange.objects.filter(user=request.user).count():
             msg = _("An email address change request was found. It must be deleted before a new one can be requested.")
             messages.add_message(request, messages.ERROR, msg)
-            logger.error('Pending email address change request found.')
-            return HttpResponseRedirect(reverse('change_email_index'))
+            #logger.error('Pending email address change request found.')
+            object = EmailChange.objects.filter(user=request.user).get()
+            return HttpResponseRedirect(reverse('change_email_detail', args=[object.pk]))
         return super(EmailChangeCreateView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         object = form.save(commit=False)
         object.user = self.request.user
         object.save()
-        send_confirmation(object,
-                  template_name_txt=self.template_name_txt,
-                  template_name_html=self.template_name_html)
+        object.send_confirmation_mail()
         msg = _("The email address change request was processed.")
         messages.add_message(self.request, messages.INFO, msg)
-        return HttpResponseRedirect(reverse('change_email_index'))
+        return HttpResponseRedirect(reverse('change_email_detail', args=[object.id,]))
 
 
 class EmailChangeDeleteView(DeleteView):
@@ -133,12 +140,14 @@ class EmailChangeDeleteView(DeleteView):
         if not EmailChange.objects.filter(user=request.user).count():
             msg = _("No email address change request was found. Either an old one has expired or a new one has not been requested.")
             messages.add_message(request, messages.ERROR, msg)
-            logger.error('No email address change request found.')
+            #logger.error('No email address change request found.')
             return HttpResponseRedirect(reverse('change_email_create'))
         return super(EmailChangeDeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self,  **kwargs):
-        return reverse('change_email')
+        msg = _("The email address change request was deleted.")
+        messages.add_message(self.request, messages.INFO, msg)
+        return EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL
 
 
 class EmailChangeDetailView(DetailView):
@@ -162,7 +171,7 @@ class EmailChangeDetailView(DetailView):
         if not EmailChange.objects.filter(user=request.user).count():
             msg = _("No email address change request was found. Either an old one has expired or a new one has not been requested.")
             messages.add_message(request, messages.ERROR, msg)
-            logger.error('No email address change request found.')
+            #logger.error('No email address change request found.')
             return HttpResponseRedirect(reverse('change_email_create'))
         return super(EmailChangeDetailView, self).dispatch(request, *args, **kwargs)
 
