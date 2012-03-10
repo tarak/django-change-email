@@ -36,6 +36,12 @@ Add ``change_email`` to the ``INSTALLED_APPS`` setting of your project and run
 
 in your project's root directory.
 
+Testing
+=================
+To test the application just run:
+
+    python manage.py test change_email
+
 Configuration
 =================
 The following settings can be defined:
@@ -120,7 +126,7 @@ EmailChangeIndexView
 Templates
 ===============
 The templates for the views need to be named following the convention on naming
-templates in Django class based generic views:
+and using templates in Django class based generic views:
 
 
 change_mail/emailchange_confirm.html
