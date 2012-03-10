@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-10 01:25+0100\n"
+"POT-Creation-Date: 2012-03-10 16:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,37 +27,37 @@ msgid ""
 "address."
 msgstr ""
 
-#: models.py:36
+#: models.py:35
 msgid "new email address"
 msgstr "Neue Email-Adresse"
 
-#: models.py:37
+#: models.py:36
 msgid "The date and time the email address change was requested."
 msgstr ""
 "Das Datum und die Zeit zu der die Änderung der Email-Adresse angefordert "
 "wurde."
 
-#: models.py:37
+#: models.py:36
 msgid "date"
 msgstr "Datum"
 
-#: models.py:38
+#: models.py:37
 msgid "The user that has requested the email address change."
 msgstr "Der Benutzer der die Änderung der Email-Adresse angefordert hat."
 
-#: models.py:38
+#: models.py:37
 msgid "user"
 msgstr "Benutzer"
 
-#: models.py:45
+#: models.py:44
 msgid "email address change request"
 msgstr "Anforderung zur Änderung der Email-Adresse"
 
-#: models.py:46
+#: models.py:45
 msgid "email address change requests"
 msgstr "Anforderungen zur Änderung der Email-Adresse"
 
-#: views.py:57 views.py:137 views.py:168
+#: views.py:60 views.py:141 views.py:172
 msgid ""
 "No email address change request was found. Either an old one has expired or "
 "a new one has not been requested."
@@ -66,19 +66,19 @@ msgstr ""
 "Entwederist eine alte Anforderung abgelaufen oder es wurde keine Änderung "
 "der Email-Adresse angefordert."
 
-#: views.py:73
+#: views.py:76
 msgid ""
 "The email address change was confirmed. Your new email address will be used "
 "as primary address."
 msgstr ""
 
-#: views.py:76
+#: views.py:79
 #, fuzzy
 msgid ""
 "The email address change has not been confirmed. Please request a new one."
 msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
 
-#: views.py:102
+#: views.py:105
 msgid ""
 "An email address change request was found. It must be deleted before a new "
 "one can be requested."
@@ -86,11 +86,11 @@ msgstr ""
 "Eine Anforderung zur Änderung der Email-Adresse wurde gefunden. Diese "
 "mussgelöscht werden bevor eine neue Anforderung gestellt werden kann."
 
-#: views.py:113
+#: views.py:117
 msgid "The email address change request was processed."
 msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
 
-#: views.py:144
+#: views.py:148
 #, fuzzy
 msgid "The email address change request was deleted."
 msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
