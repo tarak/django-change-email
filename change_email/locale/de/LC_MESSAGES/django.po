@@ -26,6 +26,8 @@ msgid ""
 "This email address is already in use. Please supply a different email "
 "address."
 msgstr ""
+"Diese Email-Adresse is bereits in Benutzung. Bitte geben Sie eine andere"
+"Email-Adresse an."
 
 #: models.py:35
 msgid "new email address"
@@ -71,12 +73,15 @@ msgid ""
 "The email address change was confirmed. Your new email address will be used "
 "as primary address."
 msgstr ""
+"Die Anforderung zur Änderung der Email-Adresse wurde bestätigt."
+"Die neue Email-Adresse wird von nun an als primäre Email-Adresse benutzt.s"
 
 #: views.py:79
-#, fuzzy
 msgid ""
 "The email address change has not been confirmed. Please request a new one."
-msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
+msgstr ""
+"Die Anforderung zur Änderung der Email-Adresse wurde nicht bestätigt."
+"Bitte fordern Sie eine neue Änderung der Email-Adresse an."
 
 #: views.py:105
 msgid ""
@@ -91,9 +96,5 @@ msgid "The email address change request was processed."
 msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
 
 #: views.py:148
-#, fuzzy
 msgid "The email address change request was deleted."
-msgstr "Die Anforderung zur Änderung der Email-Adresse wurde verarbeitet."
-
-#~ msgid "This email address is taken."
-#~ msgstr "Diese Email-Adresse ist vergeben."
+msgstr "Die Anforderung zur Änderung der Email-Adresse wurde gelöscht."
