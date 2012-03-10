@@ -40,16 +40,24 @@ Configuration
 =================
 The following settings can be defined:
 
-
-:EMAIL_CHANGE_VERIFICATION_DAYS: An integer determining the number of days users
+EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL:An string or callable determining the
+    url to which the user will be redirected after the pending email address.
+    change request was successfully deleted. Defaults to ``/account/email/change/``.
+EMAIL_CHANGE_EXPIRATION_DAYS: An integer determining the number of days users
     will have to confirm their email change request. If a user does not confirm
     the request within that period, the request may be deleted by maintenance
     scripts provided with django-change-email. Defaults to 2 days.
-:EMAIL_CHANGE_FROM_EMAIL: E-mail address to use as ``from`` address in the
+EMAIL_CHANGE_FROM_EMAIL: E-mail address to use as ``from`` address in the
     confirmation mail. Defaults to settings.DEFAULT_FROM_EMAIL.
-:EMAIL_CHANGE_HTML_EMAIL: A boolean determining if a multi-part email is to be
+EMAIL_CHANGE_HTML_EMAIL: A boolean determining if a multi-part email is to be
     sent to confirm the request. This makes it possible to send HTML-emails.
     Defaults to False.
+EMAIL_CHANGE_HTML_EMAIL_TEMPLATE: A string determining the
+    template to use for the HTML part of a confirmation email.
+EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE: A string determining the
+    template to use for the subject of a confirmation email.
+EMAIL_CHANGE_TXT_EMAIL_TEMPLATE: A string determining the
+    template to use for the text part of a confirmation email.
 
 Maintenance
 =================
@@ -59,7 +67,7 @@ requests:
     python manage.py cleanupemailchangerequests
 
 This command will delete all requests older than
-``EMAIL_CHANGE_VERIFICATION_DAYS``.
+``EMAIL_CHANGE_EXPIRATION_DAYS``.
 
 Setting up URL's
 =================
@@ -102,13 +110,13 @@ The templates for the views need to be named following the convention on naming
 templates in Django class based generic views:
 
 
-:change_mail/emailchange_confirm.html: Used in the view 
+:change_mail/emailchange_confirm.html: Used in the view
     ``EmailChangeConfirmView``.
 :change_mail/emailchange_form.html: Used in the view
     ``EmailChangeCreateView``.
 :change_mail/emailchange_confirm_delete.html: Used in the view
     ``EmailChangeDeleteView``.
-:change_mail/emailchange_confirm.html: Used in the view 
+:change_mail/emailchange_confirm.html: Used in the view
     ``EmailChangeConfirmView``.
 
 
