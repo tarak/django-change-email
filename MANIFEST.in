@@ -1,1 +1,2 @@
+recursive-include change_email/fixtures *
 recursive-include change_email/locale *

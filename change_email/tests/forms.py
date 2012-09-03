@@ -1,11 +1,23 @@
+import os
+
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.test.utils import override_settings
 
 from change_email import forms
 from change_email.models import EmailChange
 
 
+@override_settings(
+    LANGUAGES=(
+        ('en', 'English'),
+    ),
+    LANGUAGE_CODE='en',
+)
 class EmailChangeFormTestCase(TestCase):
+
+    fixtures = ['django_change_email_test_forms_fixtures.json']
+
     def test_change_email_form(self):
         """
         Test that ``EmailChangeForm`` enforces an email address that is
@@ -13,16 +25,21 @@ class EmailChangeFormTestCase(TestCase):
         change request.
 
         """
-        self.bob = User.objects.create_user('bob', 'bob@example.com', 'secret')
-        self.alice = User.objects.create_user('alice', 'alice@example.com', 'secret')
-        self.pending_request = EmailChange.objects.create(new_email='bob2@example.com', user=self.bob)
+        msg = u"This email address is already in use."
+        msg = msg + u" Please supply a different email address."
+        alice = User.objects.get(username='alice')
+        bob = User.objects.get(username='bob')
+        pending_request = EmailChange.objects.get(user=bob)
         invalid_data_dicts = [
+            # Invalid email.
+            {'data': {'new_email': 'alice'},
+            'error': ('new_email', [u"Enter a valid e-mail address."])},
             # Existing user.
             {'data': {'new_email': 'alice@example.com'},
-            'error': ('new_email', [u"This email address is already in use. Please supply a different email address."])},
+            'error': ('new_email', [msg])},
             # Existing email address change request.
             {'data': {'new_email': 'bob2@example.com'},
-            'error': ('new_email', [u"This email address is already in use. Please supply a different email address."])},
+            'error': ('new_email', [msg])},
             ]
 
         for invalid_dict in invalid_data_dicts:
@@ -32,6 +49,3 @@ class EmailChangeFormTestCase(TestCase):
                              invalid_dict['error'][1])
         form = forms.EmailChangeForm(data={'new_email': 'alice2@example.com'})
         self.failUnless(form.is_valid())
-        self.pending_request.delete()
-        self.bob.delete()
-        self.alice.delete()

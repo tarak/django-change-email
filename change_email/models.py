@@ -1,4 +1,5 @@
 import datetime
+import urllib
 
 from django.contrib.auth.models import User
 from django.contrib.sites.models import RequestSite
@@ -10,31 +11,31 @@ from django.db import models
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
+from django.utils.http import urlquote
+from django.core.signing import Signer
+from django.core.signing import BadSignature
 
-from change_email import app_settings
+from change_email.conf import settings
 from change_email.managers import ExpiredEmailChangeManager
 from change_email.managers import PendingEmailChangeManager
-from change_email.tokens import default_token_generator
-
-
-EMAIL_CHANGE_FROM_EMAIL = getattr(app_settings, 'EMAIL_CHANGE_FROM_EMAIL')
-EMAIL_CHANGE_HTML_EMAIL = getattr(app_settings, 'EMAIL_CHANGE_HTML_EMAIL')
-EMAIL_CHANGE_HTML_EMAIL_TEMPLATE = getattr(app_settings, 'EMAIL_CHANGE_HTML_EMAIL_TEMPLATE')
-EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE = getattr(app_settings, 'EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE')
-EMAIL_CHANGE_TXT_EMAIL_TEMPLATE = getattr(app_settings, 'EMAIL_CHANGE_TXT_EMAIL_TEMPLATE')
-EMAIL_CHANGE_EXPIRATION_DAYS = getattr(app_settings, 'EMAIL_CHANGE_EXPIRATION_DAYS')
 
 
 class EmailChange(models.Model):
     """
-    A model to temporarily store an e-mail adresses change request.
-
-    A new email address is required. Other fields are optional. The user
-    relation (OneToOneField) is set automatically upon instance creation.
-    """
-    new_email = models.EmailField(unique=True, verbose_name=_('new email address'),)
-    date = models.DateTimeField(auto_now_add=True, help_text=_('The date and time the email address change was requested.'), verbose_name=_('date'),)
-    user = models.OneToOneField(User, help_text=_('The user that has requested the email address change.'), verbose_name=_('user'),)
+A model to temporarily store an email adress change request.
+"""
+    new_email = models.EmailField(unique=True,
+                                  help_text=_('The new email address that'
+                                              ' still needs to be confirmed.'),
+                                  verbose_name=_('new email address'),)
+    date = models.DateTimeField(auto_now_add=True,
+                                help_text=_('The date and time the email '
+                                            'address change was requested.'),
+                                verbose_name=_('date'),)
+    user = models.OneToOneField(User,
+                                help_text=_('The user that has requested the'
+                                            ' email address change.'),
+                                verbose_name=_('user'),)
 
     objects = models.Manager()
     expired_objects = ExpiredEmailChangeManager()
@@ -49,42 +50,100 @@ class EmailChange(models.Model):
         return "%s" % self.user.username
 
     def get_absolute_url(self):
-        return reverse('change_email_detail',  pk=self.pk)
+        return reverse('change_email_detail', kwargs={'pk': self.pk})
 
-    def has_expired(self):
-        "An instance method to determine whether the email address change request has expired."
-        delta = datetime.timedelta(days=EMAIL_CHANGE_EXPIRATION_DAYS)
+    def has_expired(self, seconds=None):
+        """
+Checks whether this request has already expired.
+
+:kwarg int seconds: The number of seconds to calculate a
+    :py:class:`datetime.timedelta` object.
+    Defaults to :setting:`EMAIL_CHANGE_TIMEOUT`.
+:returns: ``True`` if the request has already expired,
+    ``False`` otherwise.
+:rtype: bool
+"""
+        if not seconds:
+            seconds = settings.EMAIL_CHANGE_TIMEOUT
+        delta = datetime.timedelta(seconds=seconds)
         expiration_date = datetime.datetime.now() - delta
         return expiration_date >= self.date
 
-    def send_confirmation_mail(self):
-        """An instance method to send a confirmation mail to the new email address.
+    def check_token(self, token, unquote=False):
+        """
+Checks if
 
-The confirmation email will make use of three templates that
+- the token has not expired by calling :func:`has_expired`.
+- the token has not been tampered with by
+  calling :func:`verify_token`.
+
+:arg str token: The token to check, as generated
+    by :func:`make_token`.
+:kwarg bool unquote: Determines wether to unquote the token
+    by calling :py:func:`urllib.unquote`.
+    Defaults to ``False``.
+:returns: ``True`` if the check was successfully completed,
+    ``False`` otherwise.
+:rtype: bool
+"""
+        if not self.has_expired():
+            return self.verify_token(token, unquote=unquote)
+        return False
+
+    def get_expiration_date(self, seconds=None):
+        """
+Returns the expiration date of an :model:`EmailChange` object by adding
+a given amount of seconds to it.
+
+:kwarg int seconds: The number of seconds to calculate a
+    :py:class:`datetime.timedelta` object.
+    Defaults to :setting:`EMAIL_CHANGE_TIMEOUT`.
+:returns:  A :py:class:`datetime` object representing the expiration
+    date.
+:rtype: :py:obj:`.datetime`
+"""
+        if not seconds:
+            seconds = settings.EMAIL_CHANGE_TIMEOUT
+        delta = datetime.timedelta(seconds=seconds)
+        return self.date + delta
+
+    def make_token(self, quote=False):
+        """
+Generates a signed token to use in one-time secret URL's
+to confirm the email address change request.
+
+:kwarg bool quote: Determines wether to URL-encode the token
+    by calling Django's :func:`urlquote`.
+    Defaults to ``False``.
+:returns: A token.
+:rtype: str
+"""
+        signer = Signer()
+        value = signer.sign(self.new_email)
+        email, token = value.split(':',  1)
+        if quote:
+            return urlquote(token)
+        return token
+
+    def send_confirmation_mail(self):
+        """
+An instance method to send a confirmation mail to the new
+email address.
+
+The generation of a confirmation email will use three templates that
 can be set in each project's settings:
 
-:template:`change_email/emailchange_subject.txt`
-    This template will be used for the subject line of the
-    email. Because it is used as the subject line of an email,
-    this template's output **must** be only a single line of
-    text; output longer than one line will be forcibly joined
-    into only a single line.
+* :setting:`EMAIL_CHANGE_HTML_EMAIL_TEMPLATE`
+* :setting:`EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE`
+* :setting:`EMAIL_CHANGE_TXT_EMAIL_TEMPLATE`
 
-
-:template:`change_email/emailchange_email.txt`
-    This template will be used for the body of the email.
-
-:template:`change_email/emailchange_email.html`
-    This template will be used for the HTML part of the email.
-
-These templates will each receive the following context
-variables:
+These templates will receive the following context variables:
 
 ``date``
-    The date when this email address change was requested.
+    The date when the email address change was requested.
 
-``expiration_days``
-    The number of days remaining during which this request may
+``timeout_days``
+    The number of days remaining during which the request may
     be waiting for confirmation.
 
 ``current_site``
@@ -94,7 +153,7 @@ variables:
     ``django.contrib.sites.models.Site`` (if the sites
     application is installed) or
     ``django.contrib.sites.models.RequestSite`` (if
-    not).Consult the documentation for the Django sites
+    not). Consult the documentation for the Django sites
     framework for details regarding these objects' interfaces.
 
 ``new_email``
@@ -104,31 +163,53 @@ variables:
     The confirmation token for the new email address.
 
 ``user``
-    The user that has requested this email address change.
-
-        """
+    The user that has requested the email address change.
+"""
         if Site._meta.installed:
             current_site = Site.objects.get_current()
         else:
             current_site = RequestSite(request)
-        token = default_token_generator.make_token(self.user)
-        ctx_dict = {'current_site': current_site,
+        subject = settings.EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE
+        body_htm = settings.EMAIL_CHANGE_HTML_EMAIL_TEMPLATE
+        body_txt = settings.EMAIL_CHANGE_TXT_EMAIL_TEMPLATE
+        context = {'current_site': current_site,
                     'date': self.date,
-                    'expiration_days': EMAIL_CHANGE_EXPIRATION_DAYS,
+                    'timeout_date': self.get_expiration_date(),
                     'new_email': self.new_email,
-                    'token': token,
-                    'user': self.user,}
-        subject = render_to_string(EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE,
-                                   ctx_dict)
+                    'token': self.make_token(),
+                    'user': self.user}
+        subject = render_to_string(subject, context)
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())
-        text_message = render_to_string(EMAIL_CHANGE_TXT_EMAIL_TEMPLATE,
-                                   ctx_dict)
-        if EMAIL_CHANGE_HTML_EMAIL:
-            html_message = render_to_string(EMAIL_CHANGE_HTML_EMAIL_TEMPLATE,
-                                   ctx_dict)
-            msg = EmailMultiAlternatives(subject, text_message, EMAIL_CHANGE_FROM_EMAIL, [self.new_email])
+        text_message = render_to_string(body_txt, context)
+        if settings.EMAIL_CHANGE_HTML_EMAIL:
+            html_message = render_to_string(body_htm, context)
+            msg = EmailMultiAlternatives(subject, text_message,
+                                         settings.EMAIL_CHANGE_FROM_EMAIL,
+                                         [self.new_email])
             msg.attach_alternative(html_message, "text/html")
             msg.send()
         else:
-            send_mail(subject, text_message, EMAIL_CHANGE_FROM_EMAIL, [self.new_email])
+            send_mail(subject, text_message,
+                      settings.EMAIL_CHANGE_FROM_EMAIL,
+                      [self.new_email])
+
+    def verify_token(self, token, unquote=False):
+        """
+Checks if the token has been tampered with.
+
+:arg str token: The token to check, as generated by
+    :func:`make_token`.
+:kwarg bool unquote: Determines wether to unquote the token by
+    calling :py:func:`urllib.unquote`. Defaults to ``False``.
+:returns: ``True`` if the token has not been tampered with,
+    ``False`` otherwise.
+:rtype: bool
+"""
+        signer = Signer()
+        value = "%s:%s" % (self.new_email, urllib.unquote(token))
+        try:
+            original = signer.unsign(value)
+        except BadSignature:
+            return False
+        return True

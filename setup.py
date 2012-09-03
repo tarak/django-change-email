@@ -11,7 +11,7 @@ containing a confirmation URL that must be visited for the new address to be val
 
 Users can see pending change requests and delete them if necessary.""",
     author='Tarak Blah',
-    author_email='halbkarat@googlemail.com',
+    author_email='halbkarat@gmail.com',
     url='https://github.com/tarak/django-change-email',
     include_package_data=True,
     packages=find_packages(),
@@ -23,5 +23,6 @@ Users can see pending change requests and delete them if necessary.""",
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Framework :: Django',
-    ]
+    ],
+    test_suite='tests.main',
 )

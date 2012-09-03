@@ -5,7 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 from change_email.models import EmailChange
 
 
-class EmailNotInUseValidator(object):
+class EmailNotUsedValidator(object):
+    """
+A validator to check if a given email address is already taken.
+"""
     code = "email_in_use"
     msg = _("This email address is already in use."
             " Please supply a different email address.")
@@ -18,4 +21,4 @@ class EmailNotInUseValidator(object):
             raise ValidationError(self.msg, code=self.code)
         return
 
-validate_email_not_in_use = EmailNotInUseValidator()
+validate_email_not_used = EmailNotUsedValidator()

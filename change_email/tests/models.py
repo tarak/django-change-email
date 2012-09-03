@@ -1,73 +1,99 @@
+import os
+import time
 import datetime
 
 from django.contrib.auth.models import User
 from django.core import management
 from django.test import TestCase
+from django.test.utils import override_settings
 
-from change_email import app_settings
+from change_email.conf import settings
 from change_email.models import EmailChange
 
 
-EMAIL_CHANGE_EXPIRATION_DAYS = getattr(app_settings, 'EMAIL_CHANGE_EXPIRATION_DAYS')
-
+@override_settings(USE_TZ=False)
 class EmailChangeModelTestCase(TestCase):
+
+    fixtures = ['django_change_email_test_models_fixtures.json']
+
     def setUp(self):
-        self.alice = User.objects.create_user('alice', 'alice@example.com', 'secret')
-        self.bob = User.objects.create_user('bob', 'bob@example.com', 'secret')
+        self.alice = User.objects.get(username='alice')
+        self.bob = User.objects.get(username='bob')
+        self.timeout_days = settings.EMAIL_CHANGE_TIMEOUT
 
     def test_email_address_change_creation(self):
         """
-        Creating an new email address change request populates the correct data.
+        Creating a new email address change request populates the correct data.
 
         """
-        self.pending_request = EmailChange.objects.create(new_email='bob2@example.com', user=self.bob)
-        self.assertEqual(self.pending_request.user.id, self.bob.id)
-        self.assertEqual(self.pending_request.new_email, 'bob2@example.com')
-        self.failIf(self.pending_request.has_expired())
-        self.pending_request.delete()
+        request = EmailChange.objects.create(new_email='bob2@example.com',
+                                             user=self.bob)
+        self.assertEqual(request.user.id, self.bob.id)
+        self.assertEqual(request.new_email, 'bob2@example.com')
+        self.failIf(request.has_expired())
+        request.delete()
+
+    def test_email_address_change_has_expired(self):
+        """
+        Testing the model's token methods.
+
+        """
+        request1 = EmailChange.objects.create(new_email='bob2@example.com',
+                                              user=self.bob)
+        time.sleep(2)
+        self.failUnless(request1.has_expired(seconds=1))
+        self.failIf(request1.has_expired(seconds=1000))
+
 
     def test_email_address_change_management_command(self):
         """
         Testing the management command.
 
         """
-        self.pending_request1 = EmailChange.objects.create(new_email='bob2@example.com', user=self.bob)
-        self.assertEqual(self.pending_request1.user.id, self.bob.id)
-        self.assertEqual(self.pending_request1.new_email, 'bob2@example.com')
-        self.failIf(self.pending_request1.has_expired())
-        self.pending_request2 = EmailChange.objects.create(new_email='alice2@example.com', user=self.alice)
-        self.assertEqual(self.pending_request2.user.id, self.alice.id)
-        self.assertEqual(self.pending_request2.new_email, 'alice2@example.com')
-        self.failIf(self.pending_request2.has_expired())
-        self.pending_request2.date -= datetime.timedelta(days=EMAIL_CHANGE_EXPIRATION_DAYS + 1)
-        self.pending_request2.save()
-        self.pending_request2 = EmailChange.objects.filter(new_email='alice2@example.com').get()
-        self.failUnless(self.pending_request2.has_expired())
+        request1 = EmailChange.objects.create(new_email='bob2@example.com',
+                                              user=self.bob)
+        self.assertEqual(request1.user.id, self.bob.id)
+        self.assertEqual(request1.new_email, 'bob2@example.com')
+        self.failIf(request1.has_expired())
+        request2 = EmailChange.objects.create(new_email='alice2@example.com',
+                                              user=self.alice)
+        self.assertEqual(request2.user.id, self.alice.id)
+        self.assertEqual(request2.new_email, 'alice2@example.com')
+        self.failIf(request2.has_expired())
+        request2.date -= datetime.timedelta(days=self.timeout_days + 1)
+        request2.save()
+        new = 'alice2@example.com'
+        request2 = EmailChange.objects.filter(new_email=new).get()
+        self.failUnless(request2.has_expired())
         management.call_command('cleanupemailchangerequests')
         self.assertEqual(EmailChange.objects.count(), 1)
-        self.assertEqual(EmailChange.objects.filter(new_email='alice2@example.com').count(), 0)
-        self.assertEqual(EmailChange.objects.filter(new_email='bob2@example.com').count(), 1)
-        self.pending_request1.delete()
-        self.pending_request2.delete()
+        self.assertEqual(EmailChange.objects.filter(new_email=new).count(), 0)
+        new = 'bob2@example.com'
+        self.assertEqual(EmailChange.objects.filter(new_email=new).count(), 1)
+        request1.delete()
+        request2.delete()
 
     def test_email_address_change_managers(self):
         """
         Testing the model managers.
 
         """
-        self.pending_request1 = EmailChange.objects.create(new_email='bob2@example.com', user=self.bob)
-        self.assertEqual(self.pending_request1.user.id, self.bob.id)
-        self.assertEqual(self.pending_request1.new_email, 'bob2@example.com')
-        self.failIf(self.pending_request1.has_expired())
-        self.pending_request2 = EmailChange.objects.create(new_email='alice2@example.com', user=self.alice)
-        self.assertEqual(self.pending_request2.user.id, self.alice.id)
-        self.assertEqual(self.pending_request2.new_email, 'alice2@example.com')
-        self.failIf(self.pending_request2.has_expired())
-        self.pending_request2.date -= datetime.timedelta(days=EMAIL_CHANGE_EXPIRATION_DAYS + 1)
-        self.pending_request2.save()
-        self.pending_request2 = EmailChange.objects.filter(new_email='alice2@example.com').get()
-        self.failUnless(self.pending_request2.has_expired())
+        request1 = EmailChange.objects.create(new_email='bob2@example.com',
+                                              user=self.bob)
+        self.assertEqual(request1.user.id, self.bob.id)
+        self.assertEqual(request1.new_email, 'bob2@example.com')
+        self.failIf(request1.has_expired())
+        request2 = EmailChange.objects.create(new_email='alice2@example.com',
+                                              user=self.alice)
+        self.assertEqual(request2.user.id, self.alice.id)
+        self.assertEqual(request2.new_email, 'alice2@example.com')
+        self.failIf(request2.has_expired())
+        request2.date -= datetime.timedelta(days=self.timeout_days + 1)
+        request2.save()
+        new_email = 'alice2@example.com'
+        request2 = EmailChange.objects.filter(new_email=new_email).get()
+        self.failUnless(request2.has_expired())
         self.assertEqual(EmailChange.expired_objects.count(), 1)
         self.assertEqual(EmailChange.pending_objects.count(), 1)
-        self.pending_request1.delete()
-        self.pending_request2.delete()
+        request1.delete()
+        request2.delete()

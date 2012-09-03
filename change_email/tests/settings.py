@@ -10,7 +10,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.messages',
-    #'easysettings',
     'change_email',
 )
 
@@ -34,9 +33,8 @@ DATABASES = {
 ROOT_URLCONF = 'change_email.tests.urls'
 SITE_ID = 1
 
-path = os.path.join(os.path.dirname(__file__), 'tests', 'templates')
 TEMPLATE_DIRS = (
-    path,
+    os.path.join(os.path.dirname(__file__), 'tests', 'templates'),
 )
 
 SECRET_KEY = 'secret'
