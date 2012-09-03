@@ -22,11 +22,11 @@ Once you've downloaded the package, unpack it (on most operating systems, simply
 double-click; alternately, at a command line on Linux, Mac OS X or other
 Unix-like systems, type)::
 
-    $ tar zxvf django-change-email-|version|.tar.gz
+    $ tar zxvf django-change-email-<VERSION>.tar.gz
 
 This will create the directory::
 
-    django-change-email-|version|
+    django-change-email-<VERSION>
 
 which contains
 the ``setup.py`` installation script. From a command line in that directory,
