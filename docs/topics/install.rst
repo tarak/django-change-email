@@ -4,6 +4,16 @@
 Installation
 ============
 
+.. _install-requirements:
+
+Requirements
+============
+
+This application requires
+
+* `Django`_ 1.5 or newer
+* `django-easysettings`_
+
 .. _install-download:
 
 Download
@@ -42,3 +52,6 @@ inside the Python path::
 
     $ sudo ln -s django-change-email/change_email /path/to/python_site_packages/change_email
 
+
+.. _`Django`: https://www.djangoproject.com/
+.. _`django-easysettings`: https://github.com/SmileyChris/django-easysettings

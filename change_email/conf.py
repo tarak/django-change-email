@@ -12,7 +12,7 @@ Default settings for django-change-email.
     EMAIL_CHANGE_HTML_EMAIL = False
     EMAIL_CHANGE_HTML_EMAIL_TEMPLATE = 'change_email/mail/body.html'
     EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE = 'change_email/mail/subject.txt'
-    EMAIL_CHANGE_TIMEOUT = 7
+    EMAIL_CHANGE_TIMEOUT = 60*60*24*7
     EMAIL_CHANGE_TXT_EMAIL_TEMPLATE = 'change_email/mail/body.txt'
 
 

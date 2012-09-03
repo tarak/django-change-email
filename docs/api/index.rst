@@ -12,6 +12,5 @@ API Reference
    change_email.managers
    change_email.models
    change_email.signals
-   change_email.tokens
    change_email.validators
    change_email.views
