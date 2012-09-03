@@ -1,2 +1,3 @@
 recursive-include change_email/fixtures *
 recursive-include change_email/locale *
+recursive-include change_email/tests/templates *
