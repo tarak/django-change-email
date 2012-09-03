@@ -13,5 +13,5 @@ Documentation
 
 A detailled documentation is available on `GitHub Pages`_.
 
-.. _`Django`: https://www.djangoproject.com/
-.. _`GitHub Pages`: https://tarak.github.com/django-change-email
+.. _`Django`: http://www.djangoproject.com/
+.. _`GitHub Pages`: http://tarak.github.com/django-change-email
