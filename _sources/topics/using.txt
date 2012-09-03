@@ -75,7 +75,7 @@ The template to use for the subject of the confirmation mail.
 ``EMAIL_CHANGE_TIMEOUT``
 -----------------------------
 
-Default: ``7*24*60 (7 days)``
+Default: ``60*60*24*7 (7 days)``
 
 Determines after how many seconds pending email address change requests expire.
 
