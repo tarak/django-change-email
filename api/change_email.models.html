@@ -1,0 +1,364 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Models &mdash; django-change-email 0.1.1.dev documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-change-email 0.1.1.dev documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="index.html" />
+    <link rel="next" title="Signals" href="change_email.signals.html" />
+    <link rel="prev" title="Managers" href="change_email.managers.html" />
+ 
+<script type="text/javascript" src="../templatebuiltins.js"></script>
+<script type="text/javascript">
+(function($) {
+    if (!django_template_builtins) {
+       // templatebuiltins.js missing, do nothing.
+       return;
+    }
+    $(document).ready(function() {
+        // Hyperlink Django template tags and filters
+        var base = "../ref/templates/builtins.html";
+        if (base == "#") {
+            // Special case for builtins.html itself
+            base = "";
+        }
+        // Tags are keywords, class '.k'
+        $("div.highlight\\-html\\+django span.k").each(function(i, elem) {
+             var tagname = $(elem).text();
+             if ($.inArray(tagname, django_template_builtins.ttags) != -1) {
+                 var fragment = tagname.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + tagname + "</a>");
+             }
+        });
+        // Filters are functions, class '.nf'
+        $("div.highlight\\-html\\+django span.nf").each(function(i, elem) {
+             var filtername = $(elem).text();
+             if ($.inArray(filtername, django_template_builtins.tfilters) != -1) {
+                 var fragment = filtername.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + filtername + "</a>");
+             }
+        });
+    });
+})(jQuery);
+</script>
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t6">
+    <div id="hd">
+      <h1><a href="../index.html">django-change-email 0.1.1.dev documentation</a></h1>
+      <div id="global-nav">
+        <a title="Home page" href="../index.html">Home</a>  |
+        <a title="Table of contents" href="../contents.html">Table of contents</a>  |
+        <a title="Global index" href="../genindex.html">Index</a>  |
+        <a title="Module index" href="../py-modindex.html">Modules</a>
+      </div>
+      <div class="nav">
+    &laquo; <a href="change_email.managers.html" title="Managers">previous</a> 
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="change_email.signals.html" title="Signals">next</a> &raquo;</div>
+    </div>
+    
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="api-change_email.models">
+            
+  <div class="section" id="module-change_email.models">
+<span id="models"></span><span id="api-models"></span><h1>Models<a class="headerlink" href="#module-change_email.models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="emailchange">
+<span id="std:model-EmailChange"></span><h2><tt class="docutils literal"><span class="pre">EmailChange</span></tt><a class="headerlink" href="#emailchange" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="change_email.models.EmailChange">
+<em class="property">class </em><tt class="descclassname">change_email.models.</tt><tt class="descname">EmailChange</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange" title="Permalink to this definition">¶</a></dt>
+<dd><p>A model to temporarily store an email adress change request.</p>
+<dl class="attribute">
+<dt id="change_email.models.EmailChange.new_email">
+<tt class="descname">new_email</tt><a class="headerlink" href="#change_email.models.EmailChange.new_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required. The new email address.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="change_email.models.EmailChange.user">
+<tt class="descname">user</tt><a class="headerlink" href="#change_email.models.EmailChange.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required. The <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt> that has
+requested the change of email address. Must be set by the view creating
+an email address change request.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="change_email.models.EmailChange.date">
+<tt class="descname">date</tt><a class="headerlink" href="#change_email.models.EmailChange.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></a> of the request&#8217;s creation. Is set to the current
+date/time upon instance creation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.models.EmailChange.check_token">
+<tt class="descname">check_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.check_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if</p>
+<ul class="simple">
+<li>the token has not expired by calling <a class="reference internal" href="#change_email.models.EmailChange.has_expired" title="change_email.models.EmailChange.has_expired"><tt class="xref py py-func docutils literal"><span class="pre">has_expired()</span></tt></a>.</li>
+<li>the token has not been tampered with by
+calling <a class="reference internal" href="#change_email.models.EmailChange.verify_token" title="change_email.models.EmailChange.verify_token"><tt class="xref py py-func docutils literal"><span class="pre">verify_token()</span></tt></a>.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>token</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The token to check, as generated
+by <a class="reference internal" href="#change_email.models.EmailChange.make_token" title="change_email.models.EmailChange.make_token"><tt class="xref py py-func docutils literal"><span class="pre">make_token()</span></tt></a>.</li>
+<li><strong>unquote</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Determines wether to unquote the token
+by calling <a class="reference external" href="http://docs.python.org/library/urllib.html#urllib.unquote" title="(in Python v2.7)"><tt class="xref py py-func docutils literal"><span class="pre">urllib.unquote()</span></tt></a>.
+Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><tt class="docutils literal"><span class="pre">True</span></tt> if the check was successfully completed,
+<tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.models.EmailChange.get_expiration_date">
+<tt class="descname">get_expiration_date</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.get_expiration_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the expiration date of an <a class="reference internal" href="#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object by adding
+a given amount of seconds to it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>seconds</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The number of seconds to calculate a
+<a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.timedelta" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.timedelta</span></tt></a> object.
+Defaults to <a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_TIMEOUT"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_TIMEOUT</span></tt></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <tt class="xref py py-class docutils literal"><span class="pre">datetime</span></tt> object representing the expiration
+date.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/datetime.html#datetime" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.models.EmailChange.has_expired">
+<tt class="descname">has_expired</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.has_expired" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether this request has already expired.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>seconds</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The number of seconds to calculate a
+<a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.timedelta" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.timedelta</span></tt></a> object.
+Defaults to <a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_TIMEOUT"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_TIMEOUT</span></tt></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">True</span></tt> if the request has already expired,
+<tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.models.EmailChange.make_token">
+<tt class="descname">make_token</tt><big>(</big><em>quote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.make_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a signed token to use in one-time secret URL&#8217;s
+to confirm the email address change request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>quote</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Determines wether to URL-encode the token
+by calling Django&#8217;s <tt class="xref py py-func docutils literal"><span class="pre">urlquote()</span></tt>.
+Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A token.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.models.EmailChange.send_confirmation_mail">
+<tt class="descname">send_confirmation_mail</tt><big>(</big><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.send_confirmation_mail" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance method to send a confirmation mail to the new
+email address.</p>
+<p>The generation of a confirmation email will use three templates that
+can be set in each project&#8217;s settings:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_HTML_EMAIL_TEMPLATE"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_HTML_EMAIL_TEMPLATE</span></tt></a></li>
+<li><a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE</span></tt></a></li>
+<li><a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_TXT_EMAIL_TEMPLATE"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_TXT_EMAIL_TEMPLATE</span></tt></a></li>
+</ul>
+<p>These templates will receive the following context variables:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">date</span></tt></dt>
+<dd>The date when the email address change was requested.</dd>
+<dt><tt class="docutils literal"><span class="pre">timeout_days</span></tt></dt>
+<dd>The number of days remaining during which the request may
+be waiting for confirmation.</dd>
+<dt><tt class="docutils literal"><span class="pre">current_site</span></tt></dt>
+<dd>An object representing the current site on which the user
+is logged in.  Depending on whether <tt class="docutils literal"><span class="pre">django.contrib.sites</span></tt>
+is installed, this may be an instance of either
+<tt class="docutils literal"><span class="pre">django.contrib.sites.models.Site</span></tt> (if the sites
+application is installed) or
+<tt class="docutils literal"><span class="pre">django.contrib.sites.models.RequestSite</span></tt> (if
+not). Consult the documentation for the Django sites
+framework for details regarding these objects&#8217; interfaces.</dd>
+<dt><tt class="docutils literal"><span class="pre">new_email</span></tt></dt>
+<dd>The new email address.</dd>
+<dt><tt class="docutils literal"><span class="pre">token</span></tt></dt>
+<dd>The confirmation token for the new email address.</dd>
+<dt><tt class="docutils literal"><span class="pre">user</span></tt></dt>
+<dd>The user that has requested the email address change.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.models.EmailChange.verify_token">
+<tt class="descname">verify_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.verify_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the token has been tampered with.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>token</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The token to check, as generated by
+<a class="reference internal" href="#change_email.models.EmailChange.make_token" title="change_email.models.EmailChange.make_token"><tt class="xref py py-func docutils literal"><span class="pre">make_token()</span></tt></a>.</li>
+<li><strong>unquote</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Determines wether to unquote the token by
+calling <a class="reference external" href="http://docs.python.org/library/urllib.html#urllib.unquote" title="(in Python v2.7)"><tt class="xref py py-func docutils literal"><span class="pre">urllib.unquote()</span></tt></a>. Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><tt class="docutils literal"><span class="pre">True</span></tt> if the token has not been tampered with,
+<tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>         
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Models</a><ul>
+<li><a class="reference internal" href="#emailchange"><tt class="docutils literal"><span class="pre">EmailChange</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>Browse</h3>
+  <ul>
+    
+      <li>Prev: <a href="change_email.managers.html">Managers</a></li>
+    
+    
+      <li>Next: <a href="change_email.signals.html">Signals</a></li>
+    
+  </ul>
+  <h3>You are here:</h3>
+  <ul>
+      <li>
+        <a href="../index.html">django-change-email 0.1.1.dev documentation</a>
+        
+          <ul><li><a href="index.html">API Reference</a>
+        
+        <ul><li>Models</li></ul>
+        </li></ul>
+      </li>
+  </ul>  
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/change_email.models.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+          </div> 
+        
+      
+    </div>
+    
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="change_email.managers.html" title="Managers">previous</a> 
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="change_email.signals.html" title="Signals">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Forms &mdash; django-change-email 0.1.1.dev documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-change-email 0.1.1.dev documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="index.html" />
+    <link rel="next" title="Management commands" href="change_email.management.commands.html" />
+    <link rel="prev" title="Admin interface integration" href="change_email.admin.html" />
+ 
+<script type="text/javascript" src="../templatebuiltins.js"></script>
+<script type="text/javascript">
+(function($) {
+    if (!django_template_builtins) {
+       // templatebuiltins.js missing, do nothing.
+       return;
+    }
+    $(document).ready(function() {
+        // Hyperlink Django template tags and filters
+        var base = "../ref/templates/builtins.html";
+        if (base == "#") {
+            // Special case for builtins.html itself
+            base = "";
+        }
+        // Tags are keywords, class '.k'
+        $("div.highlight\\-html\\+django span.k").each(function(i, elem) {
+             var tagname = $(elem).text();
+             if ($.inArray(tagname, django_template_builtins.ttags) != -1) {
+                 var fragment = tagname.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + tagname + "</a>");
+             }
+        });
+        // Filters are functions, class '.nf'
+        $("div.highlight\\-html\\+django span.nf").each(function(i, elem) {
+             var filtername = $(elem).text();
+             if ($.inArray(filtername, django_template_builtins.tfilters) != -1) {
+                 var fragment = filtername.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + filtername + "</a>");
+             }
+        });
+    });
+})(jQuery);
+</script>
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t6">
+    <div id="hd">
+      <h1><a href="../index.html">django-change-email 0.1.1.dev documentation</a></h1>
+      <div id="global-nav">
+        <a title="Home page" href="../index.html">Home</a>  |
+        <a title="Table of contents" href="../contents.html">Table of contents</a>  |
+        <a title="Global index" href="../genindex.html">Index</a>  |
+        <a title="Module index" href="../py-modindex.html">Modules</a>
+      </div>
+      <div class="nav">
+    &laquo; <a href="change_email.admin.html" title="Admin interface integration">previous</a> 
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="change_email.management.commands.html" title="Management commands">next</a> &raquo;</div>
+    </div>
+    
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="api-change_email.forms">
+            
+  <div class="section" id="forms">
+<span id="api-forms"></span><h1>Forms<a class="headerlink" href="#forms" title="Permalink to this headline">¶</a></h1>
+<p>django-change-email ships a <tt class="xref py py-class docutils literal"><span class="pre">django.forms.ModelForm</span></tt> class that handles
+the validation of new email addresses:</p>
+<span class="target" id="module-change_email.forms"></span><div class="section" id="emailchangeform">
+<span id="std:form-EmailChangeForm"></span><h2><tt class="docutils literal"><span class="pre">EmailChangeForm</span></tt><a class="headerlink" href="#emailchangeform" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="change_email.forms.EmailChangeForm">
+<em class="property">class </em><tt class="descclassname">change_email.forms.</tt><tt class="descname">EmailChangeForm</tt><big>(</big><em>data=None</em>, <em>files=None</em>, <em>auto_id=u'id_%s'</em>, <em>prefix=None</em>, <em>initial=None</em>, <em>error_class=&lt;class 'django.forms.util.ErrorList'&gt;</em>, <em>label_suffix=u':'</em>, <em>empty_permitted=False</em>, <em>instance=None</em><big>)</big><a class="headerlink" href="#change_email.forms.EmailChangeForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>A form to allow users to change the email address they have
+registered with.</p>
+<p>Just consists of an <tt class="docutils literal"><span class="pre">forms.EmailField</span></tt> with a
+<a class="reference internal" href="change_email.validators.html#std:validator-validate_email_not_used"><tt class="xref std std-validator docutils literal"><span class="pre">validate_email_not_used</span></tt></a> validator to check if a
+given email address is not already used.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>         
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Forms</a><ul>
+<li><a class="reference internal" href="#emailchangeform"><tt class="docutils literal"><span class="pre">EmailChangeForm</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>Browse</h3>
+  <ul>
+    
+      <li>Prev: <a href="change_email.admin.html">Admin interface integration</a></li>
+    
+    
+      <li>Next: <a href="change_email.management.commands.html">Management commands</a></li>
+    
+  </ul>
+  <h3>You are here:</h3>
+  <ul>
+      <li>
+        <a href="../index.html">django-change-email 0.1.1.dev documentation</a>
+        
+          <ul><li><a href="index.html">API Reference</a>
+        
+        <ul><li>Forms</li></ul>
+        </li></ul>
+      </li>
+  </ul>  
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/change_email.forms.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+          </div> 
+        
+      
+    </div>
+    
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="change_email.admin.html" title="Admin interface integration">previous</a> 
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="change_email.management.commands.html" title="Management commands">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

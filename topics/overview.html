@@ -1,0 +1,195 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview &mdash; django-change-email 0.1.1.dev documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-change-email 0.1.1.dev documentation" href="../index.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="django-change-email documentation index" href="../index.html" />
+ 
+<script type="text/javascript" src="../templatebuiltins.js"></script>
+<script type="text/javascript">
+(function($) {
+    if (!django_template_builtins) {
+       // templatebuiltins.js missing, do nothing.
+       return;
+    }
+    $(document).ready(function() {
+        // Hyperlink Django template tags and filters
+        var base = "../ref/templates/builtins.html";
+        if (base == "#") {
+            // Special case for builtins.html itself
+            base = "";
+        }
+        // Tags are keywords, class '.k'
+        $("div.highlight\\-html\\+django span.k").each(function(i, elem) {
+             var tagname = $(elem).text();
+             if ($.inArray(tagname, django_template_builtins.ttags) != -1) {
+                 var fragment = tagname.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + tagname + "</a>");
+             }
+        });
+        // Filters are functions, class '.nf'
+        $("div.highlight\\-html\\+django span.nf").each(function(i, elem) {
+             var filtername = $(elem).text();
+             if ($.inArray(filtername, django_template_builtins.tfilters) != -1) {
+                 var fragment = filtername.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + filtername + "</a>");
+             }
+        });
+    });
+})(jQuery);
+</script>
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t6">
+    <div id="hd">
+      <h1><a href="../index.html">django-change-email 0.1.1.dev documentation</a></h1>
+      <div id="global-nav">
+        <a title="Home page" href="../index.html">Home</a>  |
+        <a title="Table of contents" href="../contents.html">Table of contents</a>  |
+        <a title="Global index" href="../genindex.html">Index</a>  |
+        <a title="Module index" href="../py-modindex.html">Modules</a>
+      </div>
+      <div class="nav">
+    &laquo; <a href="../index.html" title="django-change-email documentation index">previous</a> 
+     |
+    <a title="django-change-email 0.1.1.dev documentation" href="../index.html" accesskey="U">up</a>
+   |
+    <a href="install.html" title="Installation">next</a> &raquo;</div>
+    </div>
+    
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="topics-overview">
+            
+  <div class="section" id="overview">
+<span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="features">
+<span id="id2"></span><h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Allows users to change the email address in
+<tt class="xref py py-class docutils literal"><span class="pre">django.contrib.auth.models.User</span></tt>.</li>
+<li>Allows users to manage pending email address change requests, including
+viewing and deleting pending requests.</li>
+<li>Django&#8217;s admin integration, see <a class="reference internal" href="../api/change_email.admin.html#api-admin"><em>Admin interface integration</em></a></li>
+<li>Optional use of the django messages framework</li>
+</ul>
+</div>
+<div class="section" id="how-email-address-change-requests-work">
+<span id="workflow"></span><h2>How email address change requests work<a class="headerlink" href="#how-email-address-change-requests-work" title="Permalink to this headline">¶</a></h2>
+<p>There might be the situation where a user wants or needs to change the email
+address in <tt class="xref py py-class docutils literal"><span class="pre">django.contrib.auth.models.User</span></tt>. Such a request is handled
+considering following rules:</p>
+<ul class="simple">
+<li>A user is only allowed one change request at a time.</li>
+<li>If a user unintentionally supplied a wrong email address a pending change
+request explicitly needs to be deleted before a new one can be requested. The
+user needs to delete the pending request by him- or herself. This is to
+prevent administrational issues on projects.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>         
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Overview</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#how-email-address-change-requests-work">How email address change requests work</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>Browse</h3>
+  <ul>
+    
+      <li>Prev: <a href="../index.html">django-change-email documentation index</a></li>
+    
+    
+      <li>Next: <a href="install.html">Installation</a></li>
+    
+  </ul>
+  <h3>You are here:</h3>
+  <ul>
+      <li>
+        <a href="../index.html">django-change-email 0.1.1.dev documentation</a>
+        
+        <ul><li>Overview</li></ul>
+        
+      </li>
+  </ul>  
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/topics/overview.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+          </div> 
+        
+      
+    </div>
+    
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="../index.html" title="django-change-email documentation index">previous</a> 
+     |
+    <a title="django-change-email 0.1.1.dev documentation" href="../index.html" accesskey="U">up</a>
+   |
+    <a href="install.html" title="Installation">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,353 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Views &mdash; django-change-email 0.1.1.dev documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-change-email 0.1.1.dev documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="index.html" />
+    <link rel="next" title="Testing" href="../topics/testing.html" />
+    <link rel="prev" title="Validators" href="change_email.validators.html" />
+ 
+<script type="text/javascript" src="../templatebuiltins.js"></script>
+<script type="text/javascript">
+(function($) {
+    if (!django_template_builtins) {
+       // templatebuiltins.js missing, do nothing.
+       return;
+    }
+    $(document).ready(function() {
+        // Hyperlink Django template tags and filters
+        var base = "../ref/templates/builtins.html";
+        if (base == "#") {
+            // Special case for builtins.html itself
+            base = "";
+        }
+        // Tags are keywords, class '.k'
+        $("div.highlight\\-html\\+django span.k").each(function(i, elem) {
+             var tagname = $(elem).text();
+             if ($.inArray(tagname, django_template_builtins.ttags) != -1) {
+                 var fragment = tagname.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + tagname + "</a>");
+             }
+        });
+        // Filters are functions, class '.nf'
+        $("div.highlight\\-html\\+django span.nf").each(function(i, elem) {
+             var filtername = $(elem).text();
+             if ($.inArray(filtername, django_template_builtins.tfilters) != -1) {
+                 var fragment = filtername.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + filtername + "</a>");
+             }
+        });
+    });
+})(jQuery);
+</script>
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t6">
+    <div id="hd">
+      <h1><a href="../index.html">django-change-email 0.1.1.dev documentation</a></h1>
+      <div id="global-nav">
+        <a title="Home page" href="../index.html">Home</a>  |
+        <a title="Table of contents" href="../contents.html">Table of contents</a>  |
+        <a title="Global index" href="../genindex.html">Index</a>  |
+        <a title="Module index" href="../py-modindex.html">Modules</a>
+      </div>
+      <div class="nav">
+    &laquo; <a href="change_email.validators.html" title="Validators">previous</a> 
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="../topics/testing.html" title="Testing">next</a> &raquo;</div>
+    </div>
+    
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="api-change_email.views">
+            
+  <div class="section" id="views">
+<span id="api-views"></span><h1>Views<a class="headerlink" href="#views" title="Permalink to this headline">¶</a></h1>
+<p>All of the following documented views are:</p>
+<ul class="simple">
+<li>only accessible to logged in users.</li>
+<li>Class based generic views. These are further documented in the Django
+documentation.</li>
+</ul>
+<span class="target" id="module-change_email.views"></span><div class="section" id="emailchangeconfirmview">
+<span id="std:view-EmailChangeConfirmView"></span><h2><tt class="docutils literal"><span class="pre">EmailChangeConfirmView</span></tt><a class="headerlink" href="#emailchangeconfirmview" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="change_email.views.EmailChangeConfirmView">
+<em class="property">class </em><tt class="descclassname">change_email.views.</tt><tt class="descname">EmailChangeConfirmView</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeConfirmView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.views.generic.base.TemplateView</span></tt></p>
+<p>A view to confirm an email address change request.</p>
+<dl class="attribute">
+<dt id="change_email.views.EmailChangeConfirmView.object">
+<tt class="descname">object</tt><em class="property"> = None</em><a class="headerlink" href="#change_email.views.EmailChangeConfirmView.object" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a>, if found.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="change_email.views.EmailChangeConfirmView.template_name">
+<tt class="descname">template_name</tt><em class="property"> = 'change_email/emailchange_confirm.html'</em><a class="headerlink" href="#change_email.views.EmailChangeConfirmView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The template used to render this view.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.views.EmailChangeConfirmView.dispatch">
+<tt class="descname">dispatch</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeConfirmView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>If an <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object that
+has been created by the user is not found, the user will be
+redirected to <a class="reference internal" href="#std:view-EmailChangeCreateView"><tt class="xref std std-view docutils literal"><span class="pre">EmailChangeCreateView</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.views.EmailChangeConfirmView.get_context_data">
+<tt class="descname">get_context_data</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeConfirmView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts following variables into the context:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">object</span></tt></dt>
+<dd>An instance of <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a>.</dd>
+<dt><tt class="docutils literal"><span class="pre">confirmed</span></tt></dt>
+<dd>A boolean determining if the change request has been confirmed
+succesfully.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.views.EmailChangeConfirmView.save">
+<tt class="descname">save</tt><big>(</big><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeConfirmView.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the new email address to <tt class="xref py py-class docutils literal"><span class="pre">django.contrib.auth.models.User</span></tt> and
+send a <a class="reference internal" href="change_email.signals.html#std:signal-email_change_confirmed"><tt class="xref std std-signal docutils literal"><span class="pre">email_change_confirmed</span></tt></a> signal.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="emailchangecreateview">
+<span id="std:view-EmailChangeCreateView"></span><h2><tt class="docutils literal"><span class="pre">EmailChangeCreateView</span></tt><a class="headerlink" href="#emailchangecreateview" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="change_email.views.EmailChangeCreateView">
+<em class="property">class </em><tt class="descclassname">change_email.views.</tt><tt class="descname">EmailChangeCreateView</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeCreateView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.CreateView</span></tt></p>
+<p>A view to create an <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object.</p>
+<dl class="attribute">
+<dt id="change_email.views.EmailChangeCreateView.form_class">
+<tt class="descname">form_class</tt><a class="headerlink" href="#change_email.views.EmailChangeCreateView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">EmailChangeForm</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="change_email.views.EmailChangeCreateView.model">
+<tt class="descname">model</tt><a class="headerlink" href="#change_email.views.EmailChangeCreateView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">EmailChange</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.views.EmailChangeCreateView.dispatch">
+<tt class="descname">dispatch</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeCreateView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>If an <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object that
+has been created by the user is found, the user will be
+redirected to <a class="reference internal" href="#std:view-EmailChangeDetailView"><tt class="xref std std-view docutils literal"><span class="pre">EmailChangeDetailView</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.views.EmailChangeCreateView.form_valid">
+<tt class="descname">form_valid</tt><big>(</big><em>form</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeCreateView.form_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the email address change request, sends an email to confirm the
+request, adds a success message for the user and redirects to
+<a class="reference internal" href="#std:view-EmailChangeDetailView"><tt class="xref std std-view docutils literal"><span class="pre">EmailChangeDetailView</span></tt></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="emailchangedeleteview">
+<span id="std:view-EmailChangeDeleteView"></span><h2><tt class="docutils literal"><span class="pre">EmailChangeDeleteView</span></tt><a class="headerlink" href="#emailchangedeleteview" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="change_email.views.EmailChangeDeleteView">
+<em class="property">class </em><tt class="descclassname">change_email.views.</tt><tt class="descname">EmailChangeDeleteView</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeDeleteView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.views.generic.edit.DeleteView</span></tt></p>
+<p>A view to delete an <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object.</p>
+<dl class="attribute">
+<dt id="change_email.views.EmailChangeDeleteView.model">
+<tt class="descname">model</tt><a class="headerlink" href="#change_email.views.EmailChangeDeleteView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">EmailChange</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.views.EmailChangeDeleteView.dispatch">
+<tt class="descname">dispatch</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeDeleteView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>If an <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object that
+has been created by the user is not found, the user will be
+redirected to <a class="reference internal" href="#std:view-EmailChangeCreateView"><tt class="xref std std-view docutils literal"><span class="pre">EmailChangeCreateView</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.views.EmailChangeDeleteView.get_success_url">
+<tt class="descname">get_success_url</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeDeleteView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the URL to redirect to after an email address change request has
+been deleted by an user. The URL to redirect to can be customized by setting
+<a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL</span></tt></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="emailchangedetailview">
+<span id="std:view-EmailChangeDetailView"></span><h2><tt class="docutils literal"><span class="pre">EmailChangeDetailView</span></tt><a class="headerlink" href="#emailchangedetailview" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="change_email.views.EmailChangeDetailView">
+<em class="property">class </em><tt class="descclassname">change_email.views.</tt><tt class="descname">EmailChangeDetailView</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeDetailView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.views.generic.detail.DetailView</span></tt></p>
+<p>A view to display an <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object.</p>
+<dl class="attribute">
+<dt id="change_email.views.EmailChangeDetailView.model">
+<tt class="descname">model</tt><a class="headerlink" href="#change_email.views.EmailChangeDetailView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">EmailChange</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.views.EmailChangeDetailView.dispatch">
+<tt class="descname">dispatch</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeDetailView.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>If an <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object that has been created by the user is not
+found, the user will be redirected to <a class="reference internal" href="#std:view-EmailChangeCreateView"><tt class="xref std std-view docutils literal"><span class="pre">EmailChangeCreateView</span></tt></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="emailchangeindexview">
+<span id="std:view-EmailChangeIndexView"></span><h2><tt class="docutils literal"><span class="pre">EmailChangeIndexView</span></tt><a class="headerlink" href="#emailchangeindexview" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="change_email.views.EmailChangeIndexView">
+<em class="property">class </em><tt class="descclassname">change_email.views.</tt><tt class="descname">EmailChangeIndexView</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeIndexView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.views.generic.base.RedirectView</span></tt></p>
+<p>A view to redirect users to other views.</p>
+<dl class="attribute">
+<dt id="change_email.views.EmailChangeIndexView.permanent">
+<tt class="descname">permanent</tt><em class="property"> = False</em><a class="headerlink" href="#change_email.views.EmailChangeIndexView.permanent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines that this view will always issue a HTTP 307 (Temporary
+Redirect) status code.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.views.EmailChangeIndexView.get_redirect_url">
+<tt class="descname">get_redirect_url</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#change_email.views.EmailChangeIndexView.get_redirect_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>If an <a class="reference internal" href="change_email.models.html#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object is found that
+has been created by the user, the user will be redirected to
+<a class="reference internal" href="#std:view-EmailChangeDetailView"><tt class="xref std std-view docutils literal"><span class="pre">EmailChangeDetailView</span></tt></a>. If such an
+object is not found the user will be redirected
+to <a class="reference internal" href="#std:view-EmailChangeCreateView"><tt class="xref std std-view docutils literal"><span class="pre">EmailChangeCreateView</span></tt></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>         
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Views</a><ul>
+<li><a class="reference internal" href="#emailchangeconfirmview"><tt class="docutils literal"><span class="pre">EmailChangeConfirmView</span></tt></a></li>
+<li><a class="reference internal" href="#emailchangecreateview"><tt class="docutils literal"><span class="pre">EmailChangeCreateView</span></tt></a></li>
+<li><a class="reference internal" href="#emailchangedeleteview"><tt class="docutils literal"><span class="pre">EmailChangeDeleteView</span></tt></a></li>
+<li><a class="reference internal" href="#emailchangedetailview"><tt class="docutils literal"><span class="pre">EmailChangeDetailView</span></tt></a></li>
+<li><a class="reference internal" href="#emailchangeindexview"><tt class="docutils literal"><span class="pre">EmailChangeIndexView</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>Browse</h3>
+  <ul>
+    
+      <li>Prev: <a href="change_email.validators.html">Validators</a></li>
+    
+    
+      <li>Next: <a href="../topics/testing.html">Testing</a></li>
+    
+  </ul>
+  <h3>You are here:</h3>
+  <ul>
+      <li>
+        <a href="../index.html">django-change-email 0.1.1.dev documentation</a>
+        
+          <ul><li><a href="index.html">API Reference</a>
+        
+        <ul><li>Views</li></ul>
+        </li></ul>
+      </li>
+  </ul>  
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/change_email.views.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+          </div> 
+        
+      
+    </div>
+    
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="change_email.validators.html" title="Validators">previous</a> 
+     |
+    <a href="index.html" title="API Reference" accesskey="U">up</a>
+   |
+    <a href="../topics/testing.html" title="Testing">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>
