@@ -1,23 +1,22 @@
-import os
-
 from django.contrib.auth.models import User
 from django.core import mail
 from django.core.urlresolvers import reverse
-from django.test import TestCase
-from django.test.utils import override_settings
 
 from change_email.forms import EmailChangeForm
 from change_email.models import EmailChange
+from change_email.tests.lib import BaseTest
 
 
-class EmailChangeViewsTestCase(TestCase):
+class EmailChangeViewsTestCase(BaseTest):
 
     fixtures = ['django_change_email_test_views_fixtures.json']
 
     def setUp(self):
+        output = super(EmailChangeViewsTestCase, self).setUp()
         self.alice = User.objects.get(username='alice')
         self.bob = User.objects.get(username='bob')
         self.client.login(username='bob', password='Oor0ohf4bi-')
+        return output
 
     def test_email_address_change_creation(self):
         """

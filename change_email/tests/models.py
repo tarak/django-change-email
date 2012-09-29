@@ -1,25 +1,24 @@
-import os
 import time
 import datetime
 
 from django.contrib.auth.models import User
 from django.core import management
-from django.test import TestCase
-from django.test.utils import override_settings
 
 from change_email.conf import settings
 from change_email.models import EmailChange
+from change_email.tests.lib import BaseTest
 
 
-@override_settings(USE_TZ=False)
-class EmailChangeModelTestCase(TestCase):
+class EmailChangeModelTestCase(BaseTest):
 
     fixtures = ['django_change_email_test_models_fixtures.json']
 
     def setUp(self):
+        output = super(EmailChangeModelTestCase, self).setUp()
         self.alice = User.objects.get(username='alice')
         self.bob = User.objects.get(username='bob')
         self.timeout_days = settings.EMAIL_CHANGE_TIMEOUT
+        return output
 
     def test_email_address_change_creation(self):
         """

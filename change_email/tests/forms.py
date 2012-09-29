@@ -2,12 +2,13 @@ import os
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.test.utils import override_settings
 
 from change_email import forms
 from change_email.models import EmailChange
+from change_email.tests.lib import BaseTest
 
-class EmailChangeFormTestCase(TestCase):
+
+class EmailChangeFormTestCase(BaseTest):
 
     fixtures = ['django_change_email_test_forms_fixtures.json']
 

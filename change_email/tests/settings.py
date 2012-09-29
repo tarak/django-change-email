@@ -1,26 +1,8 @@
 import os
 
-DEBUG = False
-LANGUAGES=(
-        ('en', 'English'),
-)
-LANGUAGE_CODE='en'
-USE_TZ=False
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'django.contrib.messages',
-    'change_email',
-)
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
-
-TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
 
 DATABASES = {
     'default': {
@@ -33,14 +15,23 @@ DATABASES = {
     },
 }
 
-ROOT_URLCONF = 'change_email.tests.urls'
-SITE_ID = 1
+DEBUG = False
 
-TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'templates'),
+LANGUAGES = (
+    ('en', 'English'),
 )
 
-SECRET_KEY = 'secret'
+LANGUAGE_CODE = 'en'
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'django.contrib.messages',
+    'change_email',
+)
 
 LOGGING = {
     'version': 1,
@@ -84,3 +75,17 @@ LOGGING = {
         }
     }
 }
+
+ROOT_URLCONF = 'change_email.tests.urls'
+
+SECRET_KEY = 'secret'
+
+SITE_ID = 1
+
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'templates'),
+)
+
+TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
+
+USE_TZ=False
