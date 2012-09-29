@@ -17,7 +17,7 @@ All of the following documented views are:
 --------------------------
 
 .. autoclass:: change_email.views.EmailChangeConfirmView
-   :members: object, template_name, token_generator, dispatch, get_context_data, save
+   :members: object, template_name, dispatch, get_context_data, save
    :show-inheritance:
 
 .. view:: EmailChangeCreateView

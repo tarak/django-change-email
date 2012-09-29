@@ -22,11 +22,11 @@ Please note the following guidelines for contributing:
 * If you write tests you should use the included BaseTest and use test
   fixtures::
     
-    from password_policies.tests.lib import BaseTest
+    from change_email.tests.lib import BaseTest
     
     class CustomTest(BaseTest):
 
-        fixtures = ['django_password_policies_custom_fixtures.json']
+        fixtures = ['django_change_email_custom_fixtures.json']
 
         def test_something(self):
             pass

@@ -110,11 +110,11 @@ and documentation.</p>
 </li>
 <li><p class="first">If you write tests you should use the included BaseTest and use test
 fixtures:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">password_policies.tests.lib</span> <span class="kn">import</span> <span class="n">BaseTest</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">change_email.tests.lib</span> <span class="kn">import</span> <span class="n">BaseTest</span>
 
 <span class="k">class</span> <span class="nc">CustomTest</span><span class="p">(</span><span class="n">BaseTest</span><span class="p">):</span>
 
-    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;django_password_policies_custom_fixtures.json&#39;</span><span class="p">]</span>
+    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;django_change_email_custom_fixtures.json&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
