@@ -7,13 +7,6 @@ from django.test.utils import override_settings
 from change_email import forms
 from change_email.models import EmailChange
 
-
-@override_settings(
-    LANGUAGES=(
-        ('en', 'English'),
-    ),
-    LANGUAGE_CODE='en',
-)
 class EmailChangeFormTestCase(TestCase):
 
     fixtures = ['django_change_email_test_forms_fixtures.json']

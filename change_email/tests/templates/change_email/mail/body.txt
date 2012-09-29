@@ -1,1 +1,1 @@
-{{ protocol }}://{{ domain }}/account/email/change/confirm/{{ uid }}-{{ token }}/
+{{ protocol }}://{{ domain }}/account/email/change/confirm/{{ token }}/

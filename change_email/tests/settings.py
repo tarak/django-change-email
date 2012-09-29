@@ -1,8 +1,11 @@
 import os
 
 DEBUG = False
-
-
+LANGUAGES=(
+        ('en', 'English'),
+)
+LANGUAGE_CODE='en'
+USE_TZ=False
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -34,7 +37,7 @@ ROOT_URLCONF = 'change_email.tests.urls'
 SITE_ID = 1
 
 TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'tests', 'templates'),
+    os.path.join(os.path.dirname(__file__), 'templates'),
 )
 
 SECRET_KEY = 'secret'

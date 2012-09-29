@@ -10,16 +10,6 @@ from change_email.forms import EmailChangeForm
 from change_email.models import EmailChange
 
 
-@override_settings(
-    LANGUAGES=(
-        ('en', 'English'),
-    ),
-    LANGUAGE_CODE='en',
-    TEMPLATE_DIRS=(
-        os.path.join(os.path.dirname(__file__), 'templates'),
-    ),
-    USE_TZ=False,
-)
 class EmailChangeViewsTestCase(TestCase):
 
     fixtures = ['django_change_email_test_views_fixtures.json']
