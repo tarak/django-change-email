@@ -71,13 +71,12 @@ Inserts following variables into the context:
     A boolean determining if the change request has been confirmed
     succesfully.
 """
-        ctx = super(EmailChangeConfirmView, self).get_context_data(**kwargs)
-        ctx['object'] = self.object
-        ctx['confirmed'] = False
+        kwargs['object'] = self.object
+        kwargs['confirmed'] = False
         if self.object.check_token(self.kwargs['token']):
-            ctx['confirmed'] = True
+            kwargs['confirmed'] = True
             self.save()
-        if ctx['confirmed']:
+        if kwargs['confirmed']:
             msg = _("The email address change was confirmed. Your new email"
                     " address will be used as primary address.")
             messages.add_message(self.request,
@@ -92,7 +91,7 @@ Inserts following variables into the context:
                                  msg,
                                  fail_silently=True)
             logger.error('Email address change request was not confirmed.')
-        return ctx
+        return super(EmailChangeConfirmView, self).get_context_data(**kwargs)
 
     def save(self):
         """
