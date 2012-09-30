@@ -1,4 +1,4 @@
-import datetime
+from datetime import timedelta
 import urllib
 
 from django.contrib.auth.models import User
@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 
 from django.utils.http import urlquote
 from django.core.signing import Signer
@@ -65,8 +66,8 @@ Checks whether this request has already expired.
 """
         if not seconds:
             seconds = settings.EMAIL_CHANGE_TIMEOUT
-        delta = datetime.timedelta(seconds=seconds)
-        expiration_date = datetime.datetime.now() - delta
+        delta = timedelta(seconds=seconds)
+        expiration_date = timezone.now() - delta
         return expiration_date >= self.date
 
     def check_token(self, token, unquote=False):
@@ -104,7 +105,7 @@ a given amount of seconds to it.
 """
         if not seconds:
             seconds = settings.EMAIL_CHANGE_TIMEOUT
-        delta = datetime.timedelta(seconds=seconds)
+        delta = timedelta(seconds=seconds)
         return self.date + delta
 
     def make_token(self, quote=False):
