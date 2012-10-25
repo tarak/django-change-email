@@ -100,27 +100,102 @@
 <dl class="attribute">
 <dt id="change_email.models.EmailChange.new_email">
 <tt class="descname">new_email</tt><a class="headerlink" href="#change_email.models.EmailChange.new_email" title="Permalink to this definition">¶</a></dt>
-<dd><p>Required. The new email address.</p>
+<dd><p>EmailField (Required)</p>
+<p>The new email address that still needs to be confirmed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error_messages</strong> &#8211; {u&#8217;unique&#8217;: u&#8217;%(model_name)s with this %(field_label)s already exists.&#8217;, u&#8217;invalid_choice&#8217;: u&#8217;Value %r is not a valid choice.&#8217;, u&#8217;null&#8217;: u&#8217;This field cannot be null.&#8217;, u&#8217;blank&#8217;: u&#8217;This field cannot be blank.&#8217;}</li>
+<li><strong>help_text</strong> &#8211; The new email address that still needs to be confirmed.</li>
+<li><strong>unique</strong> &#8211; True</li>
+<li><strong>validators</strong> &#8211; [&#8216;<tt class="xref py py-class docutils literal"><span class="pre">EmailValidator</span></tt>&#8216;, &#8216;<tt class="xref py py-class docutils literal"><span class="pre">MaxLengthValidator</span></tt>&#8216;]</li>
+<li><strong>verbose_name</strong> &#8211; new email address</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="change_email.models.EmailChange.date">
+<tt class="descname">date</tt><a class="headerlink" href="#change_email.models.EmailChange.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>DateTimeField (Automatically set when created)</p>
+<p>The date and time the email address change was requested.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>auto_now_add</strong> &#8211; True</li>
+<li><strong>blank</strong> &#8211; True</li>
+<li><strong>error_messages</strong> &#8211; {u&#8217;unique&#8217;: u&#8217;%(model_name)s with this %(field_label)s already exists.&#8217;, u&#8217;null&#8217;: u&#8217;This field cannot be null.&#8217;, u&#8217;invalid&#8217;: u&#8221;&#8217;%s&#8217; value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] format.&#8221;, u&#8217;invalid_choice&#8217;: u&#8217;Value %r is not a valid choice.&#8217;, u&#8217;invalid_date&#8217;: u&#8221;&#8217;%s&#8217; value has the correct format (YYYY-MM-DD) but it is an invalid date.&#8221;, u&#8217;blank&#8217;: u&#8217;This field cannot be blank.&#8217;, u&#8217;invalid_datetime&#8217;: u&#8221;&#8217;%s&#8217; value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]) but it is an invalid date/time.&#8221;}</li>
+<li><strong>help_text</strong> &#8211; The date and time the email address change was requested.</li>
+<li><strong>verbose_name</strong> &#8211; date</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="change_email.models.EmailChange.user">
 <tt class="descname">user</tt><a class="headerlink" href="#change_email.models.EmailChange.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>OneToOneField(&#8216;<tt class="xref py py-class docutils literal"><span class="pre">User</span></tt>&#8216;) (Required)</p>
+<p>The user that has requested the email address change.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>db_index</strong> &#8211; True</li>
+<li><strong>error_messages</strong> &#8211; {u&#8217;unique&#8217;: u&#8217;%(model_name)s with this %(field_label)s already exists.&#8217;, u&#8217;invalid_choice&#8217;: u&#8217;Value %r is not a valid choice.&#8217;, u&#8217;null&#8217;: u&#8217;This field cannot be null.&#8217;, &#8216;invalid&#8217;: u&#8217;Model %(model)s with pk %(pk)r does not exist.&#8217;, u&#8217;blank&#8217;: u&#8217;This field cannot be blank.&#8217;}</li>
+<li><strong>help_text</strong> &#8211; The user that has requested the email address change.</li>
+<li><strong>unique</strong> &#8211; True</li>
+<li><strong>verbose_name</strong> &#8211; user</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="change_email.models.EmailChange.Meta">
+<em class="property">class </em><tt class="descname">Meta</tt><a class="headerlink" href="#change_email.models.EmailChange.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>get_latest_by = date</p>
+<p>ordering = []</p>
+<p>verbose_name = email address change request</p>
+<p>verbose_name_plural = email address change requests</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="change_email.models.new_email">
+<tt class="descclassname">change_email.models.</tt><tt class="descname">new_email</tt><a class="headerlink" href="#change_email.models.new_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required. The new email address.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="change_email.models.user">
+<tt class="descclassname">change_email.models.</tt><tt class="descname">user</tt><a class="headerlink" href="#change_email.models.user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Required. The <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt> that has
 requested the change of email address. Must be set by the view creating
 an email address change request.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="change_email.models.EmailChange.date">
-<tt class="descname">date</tt><a class="headerlink" href="#change_email.models.EmailChange.date" title="Permalink to this definition">¶</a></dt>
+<dt id="change_email.models.date">
+<tt class="descclassname">change_email.models.</tt><tt class="descname">date</tt><a class="headerlink" href="#change_email.models.date" title="Permalink to this definition">¶</a></dt>
 <dd><p>A <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></a> of the request&#8217;s creation. Is set to the current
 date/time upon instance creation.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.check_token">
-<tt class="descname">check_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.check_token" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EmailChange.</tt><tt class="descname">check_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.check_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if</p>
 <ul class="simple">
 <li>the token has not expired by calling <a class="reference internal" href="#change_email.models.EmailChange.has_expired" title="change_email.models.EmailChange.has_expired"><tt class="xref py py-func docutils literal"><span class="pre">has_expired()</span></tt></a>.</li>
@@ -153,7 +228,7 @@ Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</l
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.get_expiration_date">
-<tt class="descname">get_expiration_date</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.get_expiration_date" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EmailChange.</tt><tt class="descname">get_expiration_date</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.get_expiration_date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the expiration date of an <a class="reference internal" href="#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object by adding
 a given amount of seconds to it.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -175,7 +250,7 @@ date.</td>
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.has_expired">
-<tt class="descname">has_expired</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.has_expired" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EmailChange.</tt><tt class="descname">has_expired</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.has_expired" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether this request has already expired.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -196,7 +271,7 @@ Defaults to <a class="reference internal" href="../topics/using.html#std:setting
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.make_token">
-<tt class="descname">make_token</tt><big>(</big><em>quote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.make_token" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EmailChange.</tt><tt class="descname">make_token</tt><big>(</big><em>quote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.make_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a signed token to use in one-time secret URL&#8217;s
 to confirm the email address change request.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -217,7 +292,7 @@ Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</t
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.send_confirmation_mail">
-<tt class="descname">send_confirmation_mail</tt><big>(</big><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.send_confirmation_mail" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EmailChange.</tt><tt class="descname">send_confirmation_mail</tt><big>(</big><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.send_confirmation_mail" title="Permalink to this definition">¶</a></dt>
 <dd><p>An instance method to send a confirmation mail to the new
 email address.</p>
 <p>The generation of a confirmation email will use three templates that
@@ -254,7 +329,7 @@ framework for details regarding these objects&#8217; interfaces.</dd>
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.verify_token">
-<tt class="descname">verify_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.verify_token" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EmailChange.</tt><tt class="descname">verify_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.verify_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the token has been tampered with.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
