@@ -103,6 +103,27 @@ registered with.</p>
 <p>Just consists of an <tt class="docutils literal"><span class="pre">forms.EmailField</span></tt> with a
 <a class="reference internal" href="change_email.validators.html#std:validator-validate_email_not_used"><tt class="xref std std-validator docutils literal"><span class="pre">validate_email_not_used</span></tt></a> validator to check if a
 given email address is not already used.</p>
+<dl class="attribute">
+<dt id="change_email.forms.EmailChangeForm.new_email">
+<tt class="descname">new_email</tt><a class="headerlink" href="#change_email.forms.EmailChangeForm.new_email" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">EmailField</span></tt> (Required)</p>
+</dd></dl>
+
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error_messages</strong> &#8211; {u&#8217;required&#8217;: u&#8217;This field is required.&#8217;, u&#8217;invalid&#8217;: u&#8217;Enter a valid e-mail address.&#8217;}</li>
+<li><strong>help_text</strong> &#8211; Please enter your new email address.</li>
+<li><strong>localize</strong> &#8211; False</li>
+<li><strong>validators</strong> &#8211; [&#8216;<tt class="xref py py-class docutils literal"><span class="pre">EmailValidator</span></tt>&#8216;, &#8216;<a class="reference internal" href="change_email.validators.html#change_email.validators.EmailNotUsedValidator" title="change_email.validators.EmailNotUsedValidator"><tt class="xref py py-class docutils literal"><span class="pre">EmailNotUsedValidator</span></tt></a>&#8216;]</li>
+<li><strong>widget</strong> &#8211; TextInput</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
