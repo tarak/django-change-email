@@ -172,27 +172,6 @@
 <p>verbose_name_plural = email address change requests</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="change_email.models.new_email">
-<tt class="descclassname">change_email.models.</tt><tt class="descname">new_email</tt><a class="headerlink" href="#change_email.models.new_email" title="Permalink to this definition">¶</a></dt>
-<dd><p>Required. The new email address.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="change_email.models.user">
-<tt class="descclassname">change_email.models.</tt><tt class="descname">user</tt><a class="headerlink" href="#change_email.models.user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Required. The <tt class="xref py py-class docutils literal"><span class="pre">User</span></tt> that has
-requested the change of email address. Must be set by the view creating
-an email address change request.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="change_email.models.date">
-<tt class="descclassname">change_email.models.</tt><tt class="descname">date</tt><a class="headerlink" href="#change_email.models.date" title="Permalink to this definition">¶</a></dt>
-<dd><p>A <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></a> of the request&#8217;s creation. Is set to the current
-date/time upon instance creation.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="change_email.models.EmailChange.check_token">
 <tt class="descclassname">EmailChange.</tt><tt class="descname">check_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.check_token" title="Permalink to this definition">¶</a></dt>
