@@ -89,12 +89,12 @@ class EmailChangeViewsTestCase(BaseTest):
 
     def test_email_address_change_confirmation_success(self):
         """
-        A ``GET`` to the ``change_email_confirm`` view with the valid token works.
+        A ``GET`` to the ``change_email_confirm`` view with the valid signature works.
         """
         request = EmailChange.objects.create(new_email='bob2@example.com',
                                                           user=self.bob)
-        token = request.make_token(self.bob)
-        response = self.client.get(reverse('change_email_confirm', args=[token,]))
+        signature = request.make_signature()
+        response = self.client.get(reverse('change_email_confirm', args=[signature,]))
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['confirmed'])
         bob = User.objects.filter(username='bob').get()
@@ -103,12 +103,12 @@ class EmailChangeViewsTestCase(BaseTest):
 
     def test_email_address_change_confirmation_failure(self):
         """
-        A ``GET`` to the ``change_email_confirm`` view with an invalid token does not work.
+        A ``GET`` to the ``change_email_confirm`` view with an invalid signature does not work.
         """
         request = EmailChange.objects.create(new_email='bob2@example.com',
                                                           user=self.bob)
-        token = 'foo'
-        response = self.client.get(reverse('change_email_confirm', args=[token,]))
+        signature = 'foo'
+        response = self.client.get(reverse('change_email_confirm', args=[signature,]))
         self.assertEqual(response.status_code, 200)
         self.assertFalse(response.context['confirmed'])
         self.assertEqual(EmailChange.objects.filter(new_email='bob2@example.com').count(), 1)
@@ -120,8 +120,8 @@ class EmailChangeViewsTestCase(BaseTest):
         exist issues a redirect to the ``change_email_create`` view.
 
         """
-        token = 'foo'
-        response = self.client.get(reverse('change_email_confirm', args=[token,]))
+        signature = 'foo'
+        response = self.client.get(reverse('change_email_confirm', args=[signature,]))
         self.assertRedirects(response,
                              'http://testserver%s' % reverse('change_email_create'))
 

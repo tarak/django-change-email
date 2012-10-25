@@ -27,7 +27,7 @@ class EmailChangeFormTestCase(BaseTest):
         invalid_data_dicts = [
             # Invalid email.
             {'data': {'new_email': 'alice'},
-            'error': ('new_email', [u"Enter a valid e-mail address."])},
+            'error': ('new_email', [u"Enter a valid email address."])},
             # Existing user.
             {'data': {'new_email': 'alice@example.com'},
             'error': ('new_email', [msg])},

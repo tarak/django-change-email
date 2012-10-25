@@ -1,1 +1,1 @@
-{{ protocol }}://{{ domain }}/account/email/change/confirm/{{ token }}/
+{{ protocol }}://{{ current_site.domain }}{% url 'change_email_confirm' signature=signature %}

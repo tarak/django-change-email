@@ -3,6 +3,7 @@ import logging
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
@@ -73,7 +74,7 @@ Inserts following variables into the context:
 """
         kwargs['object'] = self.object
         kwargs['confirmed'] = False
-        if self.object.check_token(self.kwargs['token']):
+        if self.object.check_signature(self.kwargs['signature']):
             kwargs['confirmed'] = True
             self.save()
         if kwargs['confirmed']:
@@ -150,6 +151,8 @@ request, adds a success message for the user and redirects to
         email_change_created.send(sender=self, request=self.request)
         form.instance.send_confirmation_mail()
         return instance
+    form_valid = transaction.commit_on_success(form_valid)
+
 
 class EmailChangeDeleteView(DeleteView):
     """
