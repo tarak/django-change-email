@@ -15,3 +15,5 @@ the validation of new email addresses:
 
 .. autoclass:: change_email.forms.EmailChangeForm
    :members:
+   :special-members:
+   :member-order: bysource
