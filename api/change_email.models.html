@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; django-change-email 0.1.1.dev documentation</title>
+    <title>Models &mdash; django-change-email 0.1b0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.1.dev',
+        VERSION:     '0.1b0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="django-change-email 0.1.1.dev documentation" href="../index.html" />
+    <link rel="top" title="django-change-email 0.1b0 documentation" href="../index.html" />
     <link rel="up" title="API Reference" href="index.html" />
     <link rel="next" title="Signals" href="change_email.signals.html" />
     <link rel="prev" title="Managers" href="change_email.managers.html" />
@@ -69,7 +69,7 @@
     <div class="document">
   <div id="custom-doc" class="yui-t6">
     <div id="hd">
-      <h1><a href="../index.html">django-change-email 0.1.1.dev documentation</a></h1>
+      <h1><a href="../index.html">django-change-email 0.1b0 documentation</a></h1>
       <div id="global-nav">
         <a title="Home page" href="../index.html">Home</a>  |
         <a title="Table of contents" href="../contents.html">Table of contents</a>  |
@@ -163,9 +163,9 @@
 </table>
 </dd></dl>
 
-<dl class="class">
+<dl class="attribute">
 <dt id="change_email.models.EmailChange.Meta">
-<em class="property">class </em><tt class="descname">Meta</tt><a class="headerlink" href="#change_email.models.EmailChange.Meta" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">Meta</tt><a class="headerlink" href="#change_email.models.EmailChange.Meta" title="Permalink to this definition">¶</a></dt>
 <dd><p>get_latest_by = date</p>
 <p>ordering = []</p>
 <p>verbose_name = email address change request</p>
@@ -174,7 +174,7 @@
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.check_token">
-<tt class="descclassname">EmailChange.</tt><tt class="descname">check_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.check_token" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">check_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.check_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if</p>
 <ul class="simple">
 <li>the token has not expired by calling <a class="reference internal" href="#change_email.models.EmailChange.has_expired" title="change_email.models.EmailChange.has_expired"><tt class="xref py py-func docutils literal"><span class="pre">has_expired()</span></tt></a>.</li>
@@ -207,7 +207,7 @@ Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</l
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.get_expiration_date">
-<tt class="descclassname">EmailChange.</tt><tt class="descname">get_expiration_date</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.get_expiration_date" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_expiration_date</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.get_expiration_date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the expiration date of an <a class="reference internal" href="#std:model-EmailChange"><tt class="xref std std-model docutils literal"><span class="pre">EmailChange</span></tt></a> object by adding
 a given amount of seconds to it.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -229,7 +229,7 @@ date.</td>
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.has_expired">
-<tt class="descclassname">EmailChange.</tt><tt class="descname">has_expired</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.has_expired" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">has_expired</tt><big>(</big><em>seconds=None</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.has_expired" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether this request has already expired.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -250,7 +250,7 @@ Defaults to <a class="reference internal" href="../topics/using.html#std:setting
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.make_token">
-<tt class="descclassname">EmailChange.</tt><tt class="descname">make_token</tt><big>(</big><em>quote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.make_token" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">make_token</tt><big>(</big><em>quote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.make_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a signed token to use in one-time secret URL&#8217;s
 to confirm the email address change request.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -271,7 +271,7 @@ Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</t
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.send_confirmation_mail">
-<tt class="descclassname">EmailChange.</tt><tt class="descname">send_confirmation_mail</tt><big>(</big><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.send_confirmation_mail" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">send_confirmation_mail</tt><big>(</big><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.send_confirmation_mail" title="Permalink to this definition">¶</a></dt>
 <dd><p>An instance method to send a confirmation mail to the new
 email address.</p>
 <p>The generation of a confirmation email will use three templates that
@@ -308,7 +308,7 @@ framework for details regarding these objects&#8217; interfaces.</dd>
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.verify_token">
-<tt class="descclassname">EmailChange.</tt><tt class="descname">verify_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.verify_token" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">verify_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.verify_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the token has been tampered with.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -368,7 +368,7 @@ calling <a class="reference external" href="http://docs.python.org/library/urlli
   <h3>You are here:</h3>
   <ul>
       <li>
-        <a href="../index.html">django-change-email 0.1.1.dev documentation</a>
+        <a href="../index.html">django-change-email 0.1b0 documentation</a>
         
           <ul><li><a href="index.html">API Reference</a>
         
