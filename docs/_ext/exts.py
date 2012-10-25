@@ -61,7 +61,7 @@ def process_docstring(app, what, name, obj, options, lines):
             f = model_fields[type(field).__name__]
             for key in sorted(f.iterkeys()):
 
-                if hasattr(field, key) and getattr(field, key) != f[key] and getattr(field, key):
+                if hasattr(field, key) and getattr(field, key) and getattr(field, key) != f[key] :
                     attr = getattr(field, key)
                     if key == 'error_messages':
                         error_dict = {}
