@@ -76,12 +76,13 @@ def process_docstring(app, what, name, obj, options, lines):
                             v.append(n)
                         attr = v
                     lines.append(u'    :param %s: %s' % (key, attr))
-        lines.append(u'.. class:: Meta')
+        lines.append(u'')
+        lines.append(u'.. attribute:: Meta')
         lines.append(u'')
         for key in sorted(model_meta_fields.iterkeys()):
             if hasattr(obj._meta, key) and getattr(obj._meta, key) != model_meta_fields[key]:
                 lines.append(u'    %s = %s' % (key, getattr(obj._meta, key)))
-                lines.append(u'    ')
+                lines.append(u'')
 
 
     # Only look at objects that inherit from Django's base model class
