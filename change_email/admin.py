@@ -34,7 +34,7 @@ Sets the ``user`` and the ``date`` field to read only if an instance
 already exists.
 """
         if obj:
-            return ['user', 'date']
+            return ['user']
         else:
             return []
 

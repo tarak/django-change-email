@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
@@ -14,7 +14,8 @@ A validator to check if a given email address is already taken.
             " Please supply a different email address.")
 
     def __call__(self, value):
-        if User.objects.filter(email__iexact=value).count():
+        UserModel = get_user_model()
+        if UserModel.objects.filter(email__iexact=value).count():
             raise ValidationError(self.msg, code=self.code)
             return
         if EmailChange.objects.filter(new_email__iexact=value).count():

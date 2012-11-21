@@ -55,7 +55,8 @@ redirected to :view:`EmailChangeCreateView`.
                                  msg,
                                  fail_silently=True)
             logger.error('No email address change request found.')
-            return HttpResponseRedirect(reverse_lazy('change_email_create'))
+            #return HttpResponseRedirect(reverse_lazy('change_email_create'))
+            object = None
         self.object = object
         return super(EmailChangeConfirmView, self).dispatch(request,
                                                             *args,
@@ -74,14 +75,14 @@ Inserts following variables into the context:
 """
         kwargs['object'] = self.object
         kwargs['confirmed'] = False
-        if self.object.check_signature(self.kwargs['signature']):
+        if self.object and self.object.check_signature(self.kwargs['signature']):
             kwargs['confirmed'] = True
             self.save()
         if kwargs['confirmed']:
             msg = _("The email address change was confirmed. Your new email"
                     " address will be used as primary address.")
             messages.add_message(self.request,
-                                 messages.ERROR,
+                                 messages.INFO,
                                  msg,
                                  fail_silently=True)
         else:
@@ -99,7 +100,9 @@ Inserts following variables into the context:
 Saves the new email address to :class:`django.contrib.auth.models.User` and
 send a :signal:`email_change_confirmed` signal.
 """
-        self.request.user.email = self.object.new_email
+        setattr(self.request.user, settings.EMAIL_CHANGE_FIELD,
+                self.object.new_email)
+        #self.request.user.email = self.object.new_email
         self.request.user.save()
         self.object.delete()
         email_change_confirmed.send(sender=self, request=self.request)
@@ -192,7 +195,7 @@ been deleted by an user. The URL to redirect to can be customized by setting
                              msg,
                              fail_silently=True)
         email_change_deleted.send(sender=self, request=self.request)
-        return settings.EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL
+        return reverse_lazy('change_email_create')
 
 
 class EmailChangeDetailView(DetailView):

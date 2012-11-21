@@ -48,7 +48,7 @@ A model to temporarily store an email adress change request.
         get_latest_by = "date"
 
     def __unicode__(self):
-        return "%s" % self.user.username
+        return "%s" % self.user
 
     def get_absolute_url(self):
         return reverse('change_email_detail', kwargs={'pk': self.pk})
@@ -169,6 +169,7 @@ These templates will receive the following context variables:
                     'date': self.date,
                     'timeout_date': self.get_expiration_date(),
                     'new_email': self.new_email,
+                    'protocol': settings.EMAIL_CHANGE_USE_HTTPS and 'https' or 'http',
                     'signature': self.make_signature(),
                     'user': self.user}
         subject = render_to_string(subject, context)
