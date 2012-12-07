@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
+from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
+from change_email.conf import settings
 from change_email.models import EmailChange
 
 
@@ -15,11 +17,14 @@ A validator to check if a given email address is already taken.
 
     def __call__(self, value):
         UserModel = get_user_model()
-        if UserModel.objects.filter(email__iexact=value).count():
+        kargs = {'email__iexact': value}
+        if settings.EMAIL_CHANGE_VALIDATE_SITE:
+            site = Site.objects.get_current()
+            kwargs['site'] = site
+        if UserModel.objects.filter(**kwargs).count():
             raise ValidationError(self.msg, code=self.code)
             return
-        if EmailChange.objects.filter(new_email__iexact=value).count():
+        if EmailChange.objects.filter(**kwargs).count():
             raise ValidationError(self.msg, code=self.code)
-        return
 
 validate_email_not_used = EmailNotUsedValidator()

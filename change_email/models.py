@@ -25,8 +25,7 @@ class EmailChange(models.Model):
     """
 A model to temporarily store an email adress change request.
 """
-    new_email = models.EmailField(unique=True,
-                                  help_text=_('The new email address that'
+    new_email = models.EmailField(help_text=_('The new email address that'
                                               ' still needs to be confirmed.'),
                                   verbose_name=_('new email address'),)
     date = models.DateTimeField(auto_now_add=True,
@@ -37,6 +36,7 @@ A model to temporarily store an email adress change request.
                                 help_text=_('The user that has requested the'
                                             ' email address change.'),
                                 verbose_name=_('user'),)
+    site = models.ForeignKey(Site, blank=True)
 
     objects = models.Manager()
     expired_objects = ExpiredEmailChangeManager()

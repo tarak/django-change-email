@@ -23,4 +23,4 @@ given email address is not already used.
 
     class Meta:
         model = EmailChange
-        exclude = ('user',)
+        exclude = ('user', 'site')
