@@ -32,11 +32,11 @@ A model to temporarily store an email adress change request.
                                 help_text=_('The date and time the email '
                                             'address change was requested.'),
                                 verbose_name=_('date'),)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+    user = models.OneToOneField(User,
                                 help_text=_('The user that has requested the'
                                             ' email address change.'),
                                 verbose_name=_('user'),)
-    site = models.ForeignKey(Site, blank=True)
+    site = models.ForeignKey(Site, blank=True, null=True)
 
     objects = models.Manager()
     expired_objects = ExpiredEmailChangeManager()

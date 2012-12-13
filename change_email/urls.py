@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url
 
 from change_email.views import EmailChangeConfirmView
 from change_email.views import EmailChangeCreateView
