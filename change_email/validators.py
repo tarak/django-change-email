@@ -17,13 +17,16 @@ A validator to check if a given email address is already taken.
 
     def __call__(self, value):
         UserModel = get_user_model()
-        kargs = {'email__iexact': value}
+        key = '%s__iexact' % settings.EMAIL_CHANGE_FIELD
+        kwargs = {key: value}
         if settings.EMAIL_CHANGE_VALIDATE_SITE:
             site = Site.objects.get_current()
             kwargs['site'] = site
         if UserModel.objects.filter(**kwargs).count():
             raise ValidationError(self.msg, code=self.code)
             return
+        del kwargs[key]
+        kwargs['new_email__iexact'] = value
         if EmailChange.objects.filter(**kwargs).count():
             raise ValidationError(self.msg, code=self.code)
 

@@ -122,8 +122,8 @@ class EmailChangeViewsTestCase(BaseTest):
         """
         signature = 'foo'
         response = self.client.get(reverse('change_email_confirm', args=[signature,]))
-        self.assertRedirects(response,
-                             'http://testserver%s' % reverse('change_email_create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['confirmed'])
 
     def test_email_address_change_deletion(self):
         """
