@@ -1,5 +1,4 @@
 from django.conf import settings as django_settings
-from django.core.urlresolvers import reverse
 
 from easysettings import AppSettings
 

@@ -1,7 +1,5 @@
 from datetime import timedelta
-import urllib
 
-from django.contrib.auth.models import User
 from django.contrib.sites.models import RequestSite
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
@@ -12,7 +10,6 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
-from django.utils.http import urlquote
 from django.core.signing import Signer
 from django.core.signing import BadSignature
 
@@ -118,7 +115,7 @@ to confirm the email address change request.
         email, signature = value.split(':',  1)
         return signature
 
-    def send_confirmation_mail(self):
+    def send_confirmation_mail(self, request):
         """
 An instance method to send a confirmation mail to the new
 email address.
@@ -157,6 +154,8 @@ These templates will receive the following context variables:
 
 ``user``
     The user that has requested the email address change.
+
+:arg obj request: The request object.
 """
         if Site._meta.installed:
             current_site = Site.objects.get_current()
@@ -201,7 +200,7 @@ Checks if the signature has been tampered with.
         signer = Signer()
         value = "%s:%s" % (self.new_email, signature)
         try:
-            original = signer.unsign(value)
+            signer.unsign(value)
         except BadSignature:
             return False
         return True

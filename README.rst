@@ -13,7 +13,7 @@ Requirements
 
 This application requires
 
-* `Django`_ 1.5 or newer
+* `Django`_ 1.5
 * `django-easysettings`_
 
 For `Django`_ version older than 1.5 there is a pre-1.5 branch.

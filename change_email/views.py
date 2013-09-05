@@ -152,7 +152,7 @@ request, adds a success message for the user and redirects to
                              msg,
                              fail_silently=True)
         email_change_created.send(sender=self, request=self.request)
-        form.instance.send_confirmation_mail()
+        form.instance.send_confirmation_mail(self.request)
         return instance
     form_valid = transaction.commit_on_success(form_valid)
 
