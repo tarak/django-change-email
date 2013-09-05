@@ -187,7 +187,7 @@ redirected to :view:`EmailChangeCreateView`.
         """
 Returns the URL to redirect to after an email address change request has
 been deleted by an user. The URL to redirect to can be customized by setting
-:setting:`EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL`.
+:py:attr:`~password_policies.conf.Settings.EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL`.
 """
         msg = _("The email address change request was deleted.")
         messages.add_message(self.request,

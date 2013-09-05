@@ -19,7 +19,7 @@ Table of contents
     topics/overview
     topics/install
     topics/setup
-    topics/using
+    topics/maintenance
     topics/support
     api/index
     topics/testing

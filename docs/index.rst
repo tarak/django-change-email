@@ -15,10 +15,10 @@ with instructions on how to install and set it up can be found here:
   :doc:`Installation <topics/install>` |
   :doc:`Setup <topics/setup>`
 
-Informations on application settings and maintenance can be found here:
+Informations on application maintenance can be found here:
 
-* **Using the app:**
-  :doc:`Configuration & maintenance <topics/using>`
+* **Maintenance:**
+  :doc:`Maintenance <topics/maintenance>`
 
 For bugfixing and feature requests please read:
 

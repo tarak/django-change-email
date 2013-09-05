@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='change_email',
+    name='django-change-email',
     version=__import__('change_email').__version__,
     description='A Django application to enable users to change their e-mail address.',
     long_description="""django-change-email enables registered users to change

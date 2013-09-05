@@ -56,7 +56,7 @@ Checks whether this request has already expired.
 
 :kwarg int seconds: The number of seconds to calculate a
     :py:class:`datetime.timedelta` object.
-    Defaults to :setting:`EMAIL_CHANGE_TIMEOUT`.
+    Defaults to :py:attr:`~password_policies.conf.Settings.EMAIL_CHANGE_TIMEOUT`.
 :returns: ``True`` if the request has already expired,
     ``False`` otherwise.
 :rtype: bool
@@ -92,7 +92,7 @@ a given amount of seconds to it.
 
 :kwarg int seconds: The number of seconds to calculate a
     :py:class:`datetime.timedelta` object.
-    Defaults to :setting:`EMAIL_CHANGE_TIMEOUT`.
+    Defaults to :py:attr:`~password_policies.conf.Settings.EMAIL_CHANGE_TIMEOUT`.
 :returns:  A :py:class:`datetime` object representing the expiration
     date.
 :rtype: :py:obj:`.datetime`
@@ -123,18 +123,17 @@ email address.
 The generation of a confirmation email will use three templates that
 can be set in each project's settings:
 
-* :setting:`EMAIL_CHANGE_HTML_EMAIL_TEMPLATE`
-* :setting:`EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE`
-* :setting:`EMAIL_CHANGE_TXT_EMAIL_TEMPLATE`
+* :py:attr:`~password_policies.conf.Settings.EMAIL_CHANGE_HTML_EMAIL_TEMPLATE`.
+* :py:attr:`~password_policies.conf.Settings.EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE`
+* :py:attr:`~password_policies.conf.Settings.EMAIL_CHANGE_TXT_EMAIL_TEMPLATE`
 
 These templates will receive the following context variables:
 
 ``date``
     The date when the email address change was requested.
 
-``timeout_days``
-    The number of days remaining during which the request may
-    be waiting for confirmation.
+``timeout_date``
+    The date whe the request will expire.
 
 ``current_site``
     An object representing the current site on which the user
@@ -148,6 +147,11 @@ These templates will receive the following context variables:
 
 ``new_email``
     The new email address.
+
+``protocol``
+    The protocol used to generate the confirmation URL, either HTTP or HTTPS.
+    To use HTTPS set :py:attr:`~password_policies.conf.Settings.EMAIL_CHANGE_USE_HTTPS`
+    to True.
 
 ``signature``
     The confirmation signature for the new email address.

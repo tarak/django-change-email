@@ -9,7 +9,7 @@ class ExpiredEmailChangeManager(models.Manager):
     def get_query_set(self):
         """
 Returns all instances that are older
-than :setting:`EMAIL_CHANGE_TIMEOUT`.
+than :py:attr:`~password_policies.conf.Settings.EMAIL_CHANGE_TIMEOUT`.
 """
         delta = datetime.timedelta(seconds=settings.EMAIL_CHANGE_TIMEOUT)
         expiration_date = datetime.datetime.now() - delta
@@ -22,7 +22,7 @@ class PendingEmailChangeManager(models.Manager):
     def get_query_set(self):
         """
 Returns all instances that are newer
-than :setting:`EMAIL_CHANGE_TIMEOUT`.
+than :py:attr:`~password_policies.conf.Settings.EMAIL_CHANGE_TIMEOUT`.
 """
         delta = datetime.timedelta(seconds=settings.EMAIL_CHANGE_TIMEOUT)
         expiration_date = datetime.datetime.now() - delta
