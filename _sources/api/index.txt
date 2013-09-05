@@ -6,6 +6,7 @@ API Reference
 .. toctree::
    :maxdepth: 2
 
+   change_email.conf
    change_email.admin
    change_email.forms
    change_email.management.commands

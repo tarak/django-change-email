@@ -9,7 +9,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; django-change-email 0.1b0 documentation</title>
+    <title>Index &mdash; django-change-email 0.1.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,7 +17,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1b0',
+        VERSION:     '0.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="django-change-email 0.1b0 documentation" href="index.html" />
+    <link rel="top" title="django-change-email 0.1.2 documentation" href="index.html" />
  
 <script type="text/javascript" src="templatebuiltins.js"></script>
 <script type="text/javascript">
@@ -68,7 +68,7 @@
     <div class="document">
   <div id="custom-doc" class="">
     <div id="hd">
-      <h1><a href="index.html">django-change-email 0.1b0 documentation</a></h1>
+      <h1><a href="index.html">django-change-email 0.1.2 documentation</a></h1>
       <div id="global-nav">
         <a title="Home page" href="index.html">Home</a>  |
         <a title="Table of contents" href="contents.html">Table of contents</a>  |
@@ -76,7 +76,7 @@
         <a title="Module index" href="py-modindex.html">Modules</a>
       </div>
       <div class="nav">
-    <a title="django-change-email 0.1b0 documentation" href="index.html" accesskey="U">up</a></div>
+    <a title="django-change-email 0.1.2 documentation" href="index.html" accesskey="U">up</a></div>
     </div>
     
     <div id="bd">
@@ -135,6 +135,10 @@
   </dt>
 
       
+  <dt><a href="api/change_email.conf.html#module-change_email.conf">change_email.conf (module)</a>
+  </dt>
+
+      
   <dt><a href="api/change_email.forms.html#module-change_email.forms">change_email.forms (module)</a>
   </dt>
 
@@ -150,18 +154,18 @@
   <dt><a href="api/change_email.models.html#module-change_email.models">change_email.models (module)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/change_email.validators.html#module-change_email.validators">change_email.validators (module)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/change_email.views.html#module-change_email.views">change_email.views (module)</a>
   </dt>
 
       
-  <dt><a href="api/change_email.models.html#change_email.models.EmailChange.check_token">check_token() (change_email.models.EmailChange method)</a>
+  <dt><a href="api/change_email.models.html#change_email.models.EmailChange.check_signature">check_signature() (change_email.models.EmailChange method)</a>
   </dt>
 
       
@@ -249,16 +253,9 @@
 
       </dl></dd>
       
-  <dt>
-    EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL">EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL (change_email.conf.Settings attribute)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL">setting</a>
-  </dt>
-
-      </dl></dd>
       
   <dt>
     email_change_deleted
@@ -271,71 +268,41 @@
 
       </dl></dd>
       
-  <dt>
-    EMAIL_CHANGE_FROM_EMAIL
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_FIELD">EMAIL_CHANGE_FIELD (change_email.conf.Settings attribute)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_FROM_EMAIL">setting</a>
-  </dt>
-
-      </dl></dd>
       
-  <dt>
-    EMAIL_CHANGE_HTML_EMAIL
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_FROM_EMAIL">EMAIL_CHANGE_FROM_EMAIL (change_email.conf.Settings attribute)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_HTML_EMAIL">setting</a>
-  </dt>
-
-      </dl></dd>
       
-  <dt>
-    EMAIL_CHANGE_HTML_EMAIL_TEMPLATE
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_HTML_EMAIL">EMAIL_CHANGE_HTML_EMAIL (change_email.conf.Settings attribute)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_HTML_EMAIL_TEMPLATE">setting</a>
-  </dt>
-
-      </dl></dd>
       
-  <dt>
-    EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_HTML_EMAIL_TEMPLATE">EMAIL_CHANGE_HTML_EMAIL_TEMPLATE (change_email.conf.Settings attribute)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE">setting</a>
-  </dt>
-
-      </dl></dd>
       
-  <dt>
-    EMAIL_CHANGE_TIMEOUT
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE">EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE (change_email.conf.Settings attribute)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_TIMEOUT">setting</a>
-  </dt>
-
-      </dl></dd>
       
-  <dt>
-    EMAIL_CHANGE_TXT_EMAIL_TEMPLATE
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_TIMEOUT">EMAIL_CHANGE_TIMEOUT (change_email.conf.Settings attribute)</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_TXT_EMAIL_TEMPLATE">setting</a>
+      
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_TXT_EMAIL_TEMPLATE">EMAIL_CHANGE_TXT_EMAIL_TEMPLATE (change_email.conf.Settings attribute)</a>
   </dt>
 
-      </dl></dd>
+      
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_USE_HTTPS">EMAIL_CHANGE_USE_HTTPS (change_email.conf.Settings attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings.EMAIL_CHANGE_VALIDATE_SITE">EMAIL_CHANGE_VALIDATE_SITE (change_email.conf.Settings attribute)</a>
+  </dt>
+
       
   <dt>
     EmailChange
@@ -366,6 +333,8 @@
   <dt><a href="api/change_email.admin.html#change_email.admin.EmailChangeAdmin">EmailChangeAdmin (class in change_email.admin)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt>
     EmailChangeConfirmView
@@ -377,8 +346,6 @@
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/change_email.views.html#change_email.views.EmailChangeConfirmView">EmailChangeConfirmView (class in change_email.views)</a>
   </dt>
@@ -570,7 +537,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="api/change_email.models.html#change_email.models.EmailChange.make_token">make_token() (change_email.models.EmailChange method)</a>
+  <dt><a href="api/change_email.models.html#change_email.models.EmailChange.make_signature">make_signature() (change_email.models.EmailChange method)</a>
   </dt>
 
       
@@ -709,43 +676,34 @@
   <dt><a href="api/change_email.models.html#change_email.models.EmailChange.send_confirmation_mail">send_confirmation_mail() (change_email.models.EmailChange method)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt>
-    setting
+    settings
   </dt>
 
       <dd><dl>
         
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL">EMAIL_CHANGE_DELETE_SUCCESS_REDIRECT_URL</a>
-  </dt>
-
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_FROM_EMAIL">EMAIL_CHANGE_FROM_EMAIL</a>
-  </dt>
-
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_HTML_EMAIL">EMAIL_CHANGE_HTML_EMAIL</a>
-  </dt>
-
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_HTML_EMAIL_TEMPLATE">EMAIL_CHANGE_HTML_EMAIL_TEMPLATE</a>
-  </dt>
-
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE">EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE</a>
-  </dt>
-
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_TIMEOUT">EMAIL_CHANGE_TIMEOUT</a>
-  </dt>
-
-        
-  <dt><a href="topics/using.html#std:setting-EMAIL_CHANGE_TXT_EMAIL_TEMPLATE">EMAIL_CHANGE_TXT_EMAIL_TEMPLATE</a>
+  <dt><a href="api/change_email.conf.html#std:settings-Settings">Settings</a>
   </dt>
 
       </dl></dd>
+      
+  <dt>
+    Settings
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/change_email.conf.html#std:settings-Settings">settings</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/change_email.conf.html#change_email.conf.Settings">Settings (class in change_email.conf)</a>
+  </dt>
+
       
   <dt>
     signal
@@ -765,6 +723,10 @@
   </dt>
 
       </dl></dd>
+      
+  <dt><a href="api/change_email.models.html#change_email.models.EmailChange.site">site (change_email.models.EmailChange attribute)</a>
+  </dt>
+
   </dl></td>
 </tr></table>
 
@@ -824,7 +786,7 @@
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="api/change_email.models.html#change_email.models.EmailChange.verify_token">verify_token() (change_email.models.EmailChange method)</a>
+  <dt><a href="api/change_email.models.html#change_email.models.EmailChange.verify_signature">verify_signature() (change_email.models.EmailChange method)</a>
   </dt>
 
       
@@ -867,7 +829,7 @@
     
     <div id="ft">
       <div class="nav">
-    <a title="django-change-email 0.1b0 documentation" href="index.html" accesskey="U">up</a></div>
+    <a title="django-change-email 0.1.2 documentation" href="index.html" accesskey="U">up</a></div>
     </div>
   </div>
 

@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; django-change-email 0.1b0 documentation</title>
+    <title>Models &mdash; django-change-email 0.1.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1b0',
+        VERSION:     '0.1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="django-change-email 0.1b0 documentation" href="../index.html" />
+    <link rel="top" title="django-change-email 0.1.2 documentation" href="../index.html" />
     <link rel="up" title="API Reference" href="index.html" />
     <link rel="next" title="Signals" href="change_email.signals.html" />
     <link rel="prev" title="Managers" href="change_email.managers.html" />
@@ -69,7 +69,7 @@
     <div class="document">
   <div id="custom-doc" class="yui-t6">
     <div id="hd">
-      <h1><a href="../index.html">django-change-email 0.1b0 documentation</a></h1>
+      <h1><a href="../index.html">django-change-email 0.1.2 documentation</a></h1>
       <div id="global-nav">
         <a title="Home page" href="../index.html">Home</a>  |
         <a title="Table of contents" href="../contents.html">Table of contents</a>  |
@@ -109,7 +109,6 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>error_messages</strong> &#8211; {u&#8217;unique&#8217;: u&#8217;%(model_name)s with this %(field_label)s already exists.&#8217;, u&#8217;invalid_choice&#8217;: u&#8217;Value %r is not a valid choice.&#8217;, u&#8217;null&#8217;: u&#8217;This field cannot be null.&#8217;, u&#8217;blank&#8217;: u&#8217;This field cannot be blank.&#8217;}</li>
 <li><strong>help_text</strong> &#8211; The new email address that still needs to be confirmed.</li>
-<li><strong>unique</strong> &#8211; True</li>
 <li><strong>validators</strong> &#8211; [&#8216;<tt class="xref py py-class docutils literal"><span class="pre">EmailValidator</span></tt>&#8216;, &#8216;<tt class="xref py py-class docutils literal"><span class="pre">MaxLengthValidator</span></tt>&#8216;]</li>
 <li><strong>verbose_name</strong> &#8211; new email address</li>
 </ul>
@@ -164,6 +163,27 @@
 </dd></dl>
 
 <dl class="attribute">
+<dt id="change_email.models.EmailChange.site">
+<tt class="descname">site</tt><a class="headerlink" href="#change_email.models.EmailChange.site" title="Permalink to this definition">¶</a></dt>
+<dd><p>ForeignKey(&#8216;<tt class="xref py py-class docutils literal"><span class="pre">Site</span></tt>&#8216;)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>blank</strong> &#8211; True</li>
+<li><strong>db_index</strong> &#8211; True</li>
+<li><strong>error_messages</strong> &#8211; {u&#8217;unique&#8217;: u&#8217;%(model_name)s with this %(field_label)s already exists.&#8217;, u&#8217;invalid_choice&#8217;: u&#8217;Value %r is not a valid choice.&#8217;, u&#8217;null&#8217;: u&#8217;This field cannot be null.&#8217;, &#8216;invalid&#8217;: u&#8217;Model %(model)s with pk %(pk)r does not exist.&#8217;, u&#8217;blank&#8217;: u&#8217;This field cannot be blank.&#8217;}</li>
+<li><strong>null</strong> &#8211; True</li>
+<li><strong>verbose_name</strong> &#8211; site</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="change_email.models.EmailChange.Meta">
 <tt class="descname">Meta</tt><a class="headerlink" href="#change_email.models.EmailChange.Meta" title="Permalink to this definition">¶</a></dt>
 <dd><p>get_latest_by = date</p>
@@ -173,33 +193,25 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="change_email.models.EmailChange.check_token">
-<tt class="descname">check_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.check_token" title="Permalink to this definition">¶</a></dt>
+<dt id="change_email.models.EmailChange.check_signature">
+<tt class="descname">check_signature</tt><big>(</big><em>signature</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.check_signature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if</p>
 <ul class="simple">
-<li>the token has not expired by calling <a class="reference internal" href="#change_email.models.EmailChange.has_expired" title="change_email.models.EmailChange.has_expired"><tt class="xref py py-func docutils literal"><span class="pre">has_expired()</span></tt></a>.</li>
-<li>the token has not been tampered with by
-calling <a class="reference internal" href="#change_email.models.EmailChange.verify_token" title="change_email.models.EmailChange.verify_token"><tt class="xref py py-func docutils literal"><span class="pre">verify_token()</span></tt></a>.</li>
+<li>the signature has not expired by calling <a class="reference internal" href="#change_email.models.EmailChange.has_expired" title="change_email.models.EmailChange.has_expired"><tt class="xref py py-func docutils literal"><span class="pre">has_expired()</span></tt></a>.</li>
+<li>the signature has not been tampered with by
+calling <a class="reference internal" href="#change_email.models.EmailChange.verify_signature" title="change_email.models.EmailChange.verify_signature"><tt class="xref py py-func docutils literal"><span class="pre">verify_signature()</span></tt></a>.</li>
 </ul>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>token</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The token to check, as generated
-by <a class="reference internal" href="#change_email.models.EmailChange.make_token" title="change_email.models.EmailChange.make_token"><tt class="xref py py-func docutils literal"><span class="pre">make_token()</span></tt></a>.</li>
-<li><strong>unquote</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Determines wether to unquote the token
-by calling <a class="reference external" href="http://docs.python.org/library/urllib.html#urllib.unquote" title="(in Python v2.7)"><tt class="xref py py-func docutils literal"><span class="pre">urllib.unquote()</span></tt></a>.
-Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>signature</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The signature to check, as generated
+by <a class="reference internal" href="#change_email.models.EmailChange.make_signature" title="change_email.models.EmailChange.make_signature"><tt class="xref py py-func docutils literal"><span class="pre">make_signature()</span></tt></a>.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><tt class="docutils literal"><span class="pre">True</span></tt> if the check was successfully completed,
-<tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">True</span></tt> if the check was successfully completed,
+<tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
 </tr>
 </tbody>
 </table>
@@ -216,7 +228,7 @@ a given amount of seconds to it.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>seconds</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The number of seconds to calculate a
 <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.timedelta" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.timedelta</span></tt></a> object.
-Defaults to <a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_TIMEOUT"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_TIMEOUT</span></tt></a>.</td>
+Defaults to <tt class="xref py py-attr docutils literal"><span class="pre">EMAIL_CHANGE_TIMEOUT</span></tt>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <tt class="xref py py-class docutils literal"><span class="pre">datetime</span></tt> object representing the expiration
 date.</td>
@@ -237,7 +249,7 @@ date.</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>seconds</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The number of seconds to calculate a
 <a class="reference external" href="http://docs.python.org/library/datetime.html#datetime.timedelta" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.timedelta</span></tt></a> object.
-Defaults to <a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_TIMEOUT"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_TIMEOUT</span></tt></a>.</td>
+Defaults to <tt class="xref py py-attr docutils literal"><span class="pre">EMAIL_CHANGE_TIMEOUT</span></tt>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">True</span></tt> if the request has already expired,
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</td>
@@ -249,21 +261,17 @@ Defaults to <a class="reference internal" href="../topics/using.html#std:setting
 </dd></dl>
 
 <dl class="method">
-<dt id="change_email.models.EmailChange.make_token">
-<tt class="descname">make_token</tt><big>(</big><em>quote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.make_token" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a signed token to use in one-time secret URL&#8217;s
+<dt id="change_email.models.EmailChange.make_signature">
+<tt class="descname">make_signature</tt><big>(</big><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.make_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a signature to use in one-time secret URL&#8217;s
 to confirm the email address change request.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>quote</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Determines wether to URL-encode the token
-by calling Django&#8217;s <tt class="xref py py-func docutils literal"><span class="pre">urlquote()</span></tt>.
-Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A signature.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A token.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
 </tbody>
 </table>
@@ -271,23 +279,22 @@ Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</t
 
 <dl class="method">
 <dt id="change_email.models.EmailChange.send_confirmation_mail">
-<tt class="descname">send_confirmation_mail</tt><big>(</big><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.send_confirmation_mail" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">send_confirmation_mail</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.send_confirmation_mail" title="Permalink to this definition">¶</a></dt>
 <dd><p>An instance method to send a confirmation mail to the new
 email address.</p>
 <p>The generation of a confirmation email will use three templates that
 can be set in each project&#8217;s settings:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_HTML_EMAIL_TEMPLATE"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_HTML_EMAIL_TEMPLATE</span></tt></a></li>
-<li><a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE</span></tt></a></li>
-<li><a class="reference internal" href="../topics/using.html#std:setting-EMAIL_CHANGE_TXT_EMAIL_TEMPLATE"><tt class="xref std std-setting docutils literal"><span class="pre">EMAIL_CHANGE_TXT_EMAIL_TEMPLATE</span></tt></a></li>
+<li><tt class="xref py py-attr docutils literal"><span class="pre">EMAIL_CHANGE_HTML_EMAIL_TEMPLATE</span></tt>.</li>
+<li><tt class="xref py py-attr docutils literal"><span class="pre">EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE</span></tt></li>
+<li><tt class="xref py py-attr docutils literal"><span class="pre">EMAIL_CHANGE_TXT_EMAIL_TEMPLATE</span></tt></li>
 </ul>
 <p>These templates will receive the following context variables:</p>
 <dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">date</span></tt></dt>
 <dd>The date when the email address change was requested.</dd>
-<dt><tt class="docutils literal"><span class="pre">timeout_days</span></tt></dt>
-<dd>The number of days remaining during which the request may
-be waiting for confirmation.</dd>
+<dt><tt class="docutils literal"><span class="pre">timeout_date</span></tt></dt>
+<dd>The date whe the request will expire.</dd>
 <dt><tt class="docutils literal"><span class="pre">current_site</span></tt></dt>
 <dd>An object representing the current site on which the user
 is logged in.  Depending on whether <tt class="docutils literal"><span class="pre">django.contrib.sites</span></tt>
@@ -299,35 +306,39 @@ not). Consult the documentation for the Django sites
 framework for details regarding these objects&#8217; interfaces.</dd>
 <dt><tt class="docutils literal"><span class="pre">new_email</span></tt></dt>
 <dd>The new email address.</dd>
-<dt><tt class="docutils literal"><span class="pre">token</span></tt></dt>
-<dd>The confirmation token for the new email address.</dd>
+<dt><tt class="docutils literal"><span class="pre">protocol</span></tt></dt>
+<dd>The protocol used to generate the confirmation URL, either HTTP or HTTPS.
+To use HTTPS set <tt class="xref py py-attr docutils literal"><span class="pre">EMAIL_CHANGE_USE_HTTPS</span></tt>
+to True.</dd>
+<dt><tt class="docutils literal"><span class="pre">signature</span></tt></dt>
+<dd>The confirmation signature for the new email address.</dd>
 <dt><tt class="docutils literal"><span class="pre">user</span></tt></dt>
 <dd>The user that has requested the email address change.</dd>
 </dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="change_email.models.EmailChange.verify_token">
-<tt class="descname">verify_token</tt><big>(</big><em>token</em>, <em>unquote=False</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.verify_token" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the token has been tampered with.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>token</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The token to check, as generated by
-<a class="reference internal" href="#change_email.models.EmailChange.make_token" title="change_email.models.EmailChange.make_token"><tt class="xref py py-func docutils literal"><span class="pre">make_token()</span></tt></a>.</li>
-<li><strong>unquote</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Determines wether to unquote the token by
-calling <a class="reference external" href="http://docs.python.org/library/urllib.html#urllib.unquote" title="(in Python v2.7)"><tt class="xref py py-func docutils literal"><span class="pre">urllib.unquote()</span></tt></a>. Defaults to <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>request</strong> (<em>obj</em>) &#8211; The request object.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><tt class="docutils literal"><span class="pre">True</span></tt> if the token has not been tampered with,
-<tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</p>
-</td>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="change_email.models.EmailChange.verify_signature">
+<tt class="descname">verify_signature</tt><big>(</big><em>signature</em><big>)</big><a class="headerlink" href="#change_email.models.EmailChange.verify_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the signature has been tampered with.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>signature</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The signature to check, as generated by
+<a class="reference internal" href="#change_email.models.EmailChange.make_signature" title="change_email.models.EmailChange.make_signature"><tt class="xref py py-func docutils literal"><span class="pre">make_signature()</span></tt></a>.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">True</span></tt> if the signature has not been tampered with,
+<tt class="docutils literal"><span class="pre">False</span></tt> otherwise.
+:rtype: bool</td>
 </tr>
 </tbody>
 </table>
@@ -368,7 +379,7 @@ calling <a class="reference external" href="http://docs.python.org/library/urlli
   <h3>You are here:</h3>
   <ul>
       <li>
-        <a href="../index.html">django-change-email 0.1b0 documentation</a>
+        <a href="../index.html">django-change-email 0.1.2 documentation</a>
         
           <ul><li><a href="index.html">API Reference</a>
         

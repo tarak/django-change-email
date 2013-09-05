@@ -31,12 +31,16 @@ by class based views in Dango:
 * ``change_mail/emailchange_detail.html``
     Used in the view :view:`EmailChangeDetailView`.
 
+It is possible to use different templates. Informations on how to change
+the templates locations can be found in the :ref:`settings <api-settings>`
+documentation.
+
 Additional templates are required to send confirmation mails on email address
-change requests. Information on these templates can be found in the
-:ref:`settings <settings>` documentation.
+change requests. Information on these templates can also be found in the
+:ref:`settings <api-settings>` documentation.
 
 .. note::
-  Minimal example templates can be found inside the tests module of
+  Minimal example e-mail templates can be found inside the tests module of
   ``django-change-email``.
 
 .. _setup-urls:
