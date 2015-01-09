@@ -1,4 +1,7 @@
-from django.conf.urls.defaults import *
+try:
+    from django.conf.urls.defaults import *
+except ImportError:
+    from django.conf.urls import patterns, url
 
 from change_email.views import EmailChangeConfirmView
 from change_email.views import EmailChangeCreateView
